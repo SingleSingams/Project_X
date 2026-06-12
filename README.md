@@ -46,8 +46,9 @@ Startpunkt. Vor jeder Veröffentlichung gilt:
 
 Ein GitHub-Actions-Workflow (`.github/workflows/deploy.yml`) baut die App und
 veröffentlicht sie auf GitHub Pages – bei jedem Push auf `main`, inklusive
-Smoke-Test als Wächter. Einmalig nötig: in den Repo-Einstellungen unter
-**Settings → Pages** als Source „GitHub Actions" wählen.
+Smoke-Test als Wächter. Pages wird beim ersten Workflow-Lauf automatisch
+aktiviert; die App erscheint dann unter
+`https://singlesingams.github.io/Project_X/`.
 
 ## Nächste Schritte (siehe KONZEPT.md)
 
@@ -55,5 +56,5 @@ Smoke-Test als Wächter. Einmalig nötig: in den Repo-Einstellungen unter
 - [x] Lektionen schalten sich nacheinander frei
 - [x] Deploy-Workflow für GitHub Pages
 - [ ] Fragen fachlich reviewen und mit Kollegen testen (Woche 1!)
-- [ ] Pages in den Repo-Einstellungen aktivieren, Share-Link live testen
+- [ ] Nach dem Merge: ersten Deploy abwarten, Share-Link live testen
 - [ ] Zweite Welt („Grundlagen" oder „Mythen-Welt") anlegen
