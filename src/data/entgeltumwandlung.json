@@ -1,0 +1,111 @@
+{
+  "weltId": "entgeltumwandlung",
+  "titel": "Entgeltumwandlung",
+  "beschreibung": "Wie aus Bruttogehalt Altersvorsorge wird – und was das wirklich kostet.",
+  "lektionen": [
+    {
+      "id": "eu-1",
+      "titel": "Die Grundidee",
+      "fragen": [
+        {
+          "typ": "multiple-choice",
+          "frage": "Was bedeutet Entgeltumwandlung?",
+          "antworten": [
+            "Ein Teil des Bruttogehalts fließt direkt in die Altersvorsorge",
+            "Der Arbeitgeber zahlt freiwillig eine Extra-Rente",
+            "Das Gehalt wird in eine andere Währung umgerechnet",
+            "Netto-Gehalt wird am Jahresende in Urlaubstage getauscht"
+          ],
+          "richtig": 0,
+          "erklaerung": "Bei der Entgeltumwandlung wird ein Teil deines Bruttogehalts abgezweigt, BEVOR Steuern und Sozialabgaben berechnet werden – und fließt in deine betriebliche Altersvorsorge. Genau daher kommt die Förderung."
+        },
+        {
+          "typ": "mythos-fakt",
+          "aussage": "Ich habe als Arbeitnehmer einen gesetzlichen Anspruch auf Entgeltumwandlung.",
+          "istFakt": true,
+          "erklaerung": "Fakt! Seit 2002 haben Arbeitnehmer grundsätzlich einen Rechtsanspruch darauf, Teile ihres Gehalts umzuwandeln (§ 1a BetrAVG). Tarifverträge können den Weg dorthin allerdings genauer regeln."
+        },
+        {
+          "typ": "schaetz-slider",
+          "frage": "Du wandelst 100 € brutto im Monat um. Wie viel weniger Netto hast du dadurch ungefähr?",
+          "min": 0,
+          "max": 100,
+          "einheit": "€",
+          "richtig": 55,
+          "toleranz": 12,
+          "erklaerung": "Meist nur grob 50–60 €! Weil die 100 € vor Steuern und Sozialabgaben abgezweigt werden, trägt der Staat einen großen Teil mit. Der genaue Wert hängt von Steuerklasse und Einkommen ab."
+        },
+        {
+          "typ": "multiple-choice",
+          "frage": "Wie viel Zuschuss muss dein Arbeitgeber bei einer Entgeltumwandlung in der Regel obendrauf legen?",
+          "antworten": [
+            "15 % des umgewandelten Betrags",
+            "Gar nichts, Zuschüsse sind freiwillig",
+            "50 % des umgewandelten Betrags",
+            "Einen vollen Monatsbeitrag pro Jahr"
+          ],
+          "richtig": 0,
+          "erklaerung": "Seit dem Betriebsrentenstärkungsgesetz gilt: Spart der Arbeitgeber durch deine Umwandlung Sozialabgaben, muss er 15 % Zuschuss zahlen (bei Direktversicherung, Pensionskasse und Pensionsfonds). Für Neuverträge seit 2019, für Altverträge seit 2022. Tarifverträge können abweichen."
+        },
+        {
+          "typ": "mythos-fakt",
+          "aussage": "Entgeltumwandlung lohnt sich nur für Gutverdiener.",
+          "istFakt": false,
+          "erklaerung": "Mythos! Gerade mittlere Einkommen profitieren von der Sozialabgaben-Ersparnis plus Arbeitgeberzuschuss. Bei sehr niedrigen Einkommen lohnt genaues Hinschauen – aber auch hier gibt es inzwischen Freibeträge bei der Grundsicherung im Alter."
+        }
+      ]
+    },
+    {
+      "id": "eu-2",
+      "titel": "Steuern, Abgaben & der Haken",
+      "fragen": [
+        {
+          "typ": "mythos-fakt",
+          "aussage": "Auf meine spätere Betriebsrente zahle ich keine Steuern – die Förderung ist geschenkt.",
+          "istFakt": false,
+          "erklaerung": "Mythos! Es gilt nachgelagerte Besteuerung: Heute sparst du Steuern, die spätere Betriebsrente musst du dafür voll versteuern. Oft ist der Steuersatz im Alter niedriger – geschenkt ist die Förderung aber nicht."
+        },
+        {
+          "typ": "schaetz-slider",
+          "frage": "Bis zu wie viel Prozent der Beitragsbemessungsgrenze (Rente) kannst du pro Jahr sozialabgabenfrei umwandeln?",
+          "min": 0,
+          "max": 10,
+          "einheit": "%",
+          "richtig": 4,
+          "toleranz": 0,
+          "erklaerung": "4 % der Beitragsbemessungsgrenze sind sozialabgabenfrei – steuerfrei sind sogar bis zu 8 %. Wer mehr als 4 % umwandelt, spart auf den überschießenden Teil also nur noch Steuern, keine Sozialabgaben."
+        },
+        {
+          "typ": "multiple-choice",
+          "frage": "Was gilt für gesetzlich Krankenversicherte bei der Auszahlung der Betriebsrente?",
+          "antworten": [
+            "Oberhalb eines Freibetrags fallen Krankenkassenbeiträge an",
+            "Betriebsrenten sind komplett beitragsfrei",
+            "Es fällt immer der doppelte Beitragssatz an",
+            "Nur Privatversicherte zahlen Beiträge"
+          ],
+          "richtig": 0,
+          "erklaerung": "Auf Betriebsrenten oberhalb eines Freibetrags zahlen gesetzlich Versicherte Krankenversicherungsbeiträge (seit 2020 gibt es den Freibetrag, er wird jährlich angepasst). Für die Pflegeversicherung gilt nur eine Freigrenze. Das schmälert die Auszahlung und gehört in jede ehrliche Rechnung."
+        },
+        {
+          "typ": "mythos-fakt",
+          "aussage": "Entgeltumwandlung senkt meine spätere gesetzliche Rente.",
+          "istFakt": true,
+          "erklaerung": "Fakt – das ist der ehrliche Haken: Du zahlst auf den umgewandelten Teil keine Rentenversicherungsbeiträge und sammelst dadurch etwas weniger gesetzliche Rente. Der 15-%-Arbeitgeberzuschuss soll genau das teilweise ausgleichen."
+        },
+        {
+          "typ": "multiple-choice",
+          "frage": "Du wechselst den Job. Was passiert mit deiner Direktversicherung aus Entgeltumwandlung?",
+          "antworten": [
+            "Du kannst sie in der Regel zum neuen Arbeitgeber mitnehmen oder privat weiterführen",
+            "Sie verfällt ersatzlos",
+            "Sie wird automatisch ausgezahlt",
+            "Der alte Arbeitgeber zahlt sie alleine weiter"
+          ],
+          "richtig": 0,
+          "erklaerung": "Deine durch Entgeltumwandlung erworbenen Anwartschaften sind sofort unverfallbar. Du kannst das Guthaben meist zum neuen Arbeitgeber mitnehmen (Portabilität), den Vertrag privat weiterführen oder beitragsfrei stellen lassen."
+        }
+      ]
+    }
+  ]
+}

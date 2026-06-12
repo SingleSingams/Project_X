@@ -1,0 +1,63 @@
+:root {
+  --farbe-primaer: #2563eb;
+  --farbe-primaer-dunkel: #1d4ed8;
+  --farbe-richtig: #16a34a;
+  --farbe-falsch: #dc2626;
+  --farbe-hintergrund: #f1f5f9;
+  --farbe-karte: #ffffff;
+  --farbe-text: #0f172a;
+  --farbe-text-leise: #64748b;
+  --radius: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: var(--farbe-hintergrund);
+  color: var(--farbe-text);
+}
+
+#app {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 16px;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  background: var(--farbe-primaer);
+  color: white;
+  width: 100%;
+  transition: background 0.15s;
+}
+
+button:hover {
+  background: var(--farbe-primaer-dunkel);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.karte {
+  background: var(--farbe-karte);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+  margin-bottom: 14px;
+}
+
+.leise {
+  color: var(--farbe-text-leise);
+  font-size: 0.875rem;
+}
