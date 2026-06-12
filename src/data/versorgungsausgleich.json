@@ -1,0 +1,60 @@
+{
+  "weltId": "versorgungsausgleich",
+  "icon": "🔀",
+  "titel": "Versorgungsausgleich",
+  "beschreibung": "Was bei Scheidung mit bAV-Anrechten passiert.",
+  "lektionen": [
+    {
+      "id": "va-1",
+      "titel": "Grundlagen der Teilung",
+      "fragen": [
+        {
+          "typ": "multiple-choice",
+          "frage": "Was passiert mit bAV-Anrechten bei einer Scheidung?",
+          "antworten": [
+            "Die in der Ehezeit erworbenen Anrechte werden grundsätzlich hälftig geteilt",
+            "Sie bleiben immer komplett beim Arbeitnehmer",
+            "Sie verfallen ersatzlos",
+            "Sie gehen vollständig an den Ex-Partner"
+          ],
+          "richtig": 0,
+          "erklaerung": "Der Halbteilungsgrundsatz: Alle in der Ehezeit erworbenen Versorgungsanrechte – auch aus der bAV – werden im Versorgungsausgleich grundsätzlich 50:50 geteilt."
+        },
+        {
+          "typ": "multiple-choice",
+          "frage": "Welche Teilungsform ist seit der Reform 2009 der Regelfall?",
+          "antworten": [
+            "Die interne Teilung",
+            "Die externe Teilung",
+            "Die Barauszahlung",
+            "Der Rentensplitting-Vertrag"
+          ],
+          "richtig": 0,
+          "erklaerung": "Seit dem VersAusglG 2009 ist die interne Teilung der Regelfall: Die ausgleichsberechtigte Person erhält ein eigenes Anrecht beim selben Versorgungsträger. Die externe Teilung ist nur in bestimmten Wertgrenzen zulässig."
+        },
+        {
+          "typ": "mythos-fakt",
+          "aussage": "Beim Versorgungsausgleich wird dem Ex-Partner sofort Geld ausgezahlt.",
+          "istFakt": false,
+          "erklaerung": "Mythos! Geteilt werden Anrechte, kein Bargeld. Der Ex-Partner bekommt eine eigene Versorgungsanwartschaft, aus der er später selbst eine Rente bezieht."
+        },
+        {
+          "typ": "mythos-fakt",
+          "aussage": "Auch Anwartschaften aus Entgeltumwandlung fallen in den Versorgungsausgleich, soweit sie in der Ehezeit erworben wurden.",
+          "istFakt": true,
+          "erklaerung": "Fakt – entscheidend ist der Erwerb in der Ehezeit, nicht die Finanzierungsform. Auch selbst finanzierte bAV-Anrechte werden geteilt."
+        },
+        {
+          "typ": "schaetz-slider",
+          "frage": "Wie viel Prozent des in der Ehezeit erworbenen Anrechts erhält die ausgleichsberechtigte Person grundsätzlich?",
+          "min": 0,
+          "max": 100,
+          "einheit": "%",
+          "richtig": 50,
+          "toleranz": 0,
+          "erklaerung": "Genau die Hälfte – daher „Halbteilungsgrundsatz“. In der Praxis können Teilungskosten und Bagatellgrenzen das Ergebnis leicht verschieben."
+        }
+      ]
+    }
+  ]
+}

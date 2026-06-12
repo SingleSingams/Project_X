@@ -16,6 +16,10 @@ npm run smoke    # Klickt die App automatisch durch (jsdom, kein Browser nötig)
 ## Wie Inhalte gepflegt werden
 
 Der gesamte Content liegt in `src/data/*.json` – eine Datei pro Themen-Welt.
+Neue Welten werden in `src/data/welten.js` registriert (dort auch die
+„Bald verfügbar"-Karten). Aktuelle Welten: Entgeltumwandlung, BetrAVG-Basics,
+Durchführungswege, Versorgungsausgleich, Barwerte & Gutachten, Berühmte Urteile.
+
 Neue Fragen schreiben heißt: JSON ergänzen, fertig. Es gibt drei Fragetypen:
 
 | `typ` | Felder |
@@ -55,6 +59,8 @@ aktiviert; die App erscheint dann unter
 - [x] Welt „Entgeltumwandlung" auf 5 Lektionen ausbauen (25 Fragen)
 - [x] Lektionen schalten sich nacheinander frei
 - [x] Deploy-Workflow für GitHub Pages
+- [x] Startseite als Themenwelten-Menü mit Fortschritt pro Welt
+- [x] Fünf neue Welten als Startpunkt (je 1–2 Lektionen)
 - [ ] Fragen fachlich reviewen und mit Kollegen testen (Woche 1!)
-- [ ] Nach dem Merge: ersten Deploy abwarten, Share-Link live testen
-- [ ] Zweite Welt („Grundlagen" oder „Mythen-Welt") anlegen
+- [ ] Neue Welten ausbauen (Ziel: 5 Lektionen pro Welt)
+- [ ] Welten „Rentenanpassung" und „Mythen-Welt" anlegen

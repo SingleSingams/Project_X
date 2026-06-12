@@ -25,17 +25,22 @@ const erwarte = (s) => {
   if (!text().includes(s)) throw new Error(`Erwartet "${s}", Seite zeigt: ${text().slice(0, 300)}`);
   console.log(`✓ ${s}`);
 };
+const schloesser = () => (text().match(/🔒/g) || []).length;
 
 await tick();
 
-// Home-Screen
+// Startseite: Welten-Menü
 erwarte('RentenHeld');
 erwarte('Daily Challenge');
+erwarte('Themenwelten');
 erwarte('Entgeltumwandlung');
-erwarte('Die Grundidee');
+erwarte('BetrAVG-Basics');
+erwarte('Berühmte Urteile');
+erwarte('Bald verfügbar');
 
-// Nur Lektion 1 ist anfangs freigeschaltet
-const schloesser = () => (text().match(/🔒/g) || []).length;
+// Welt öffnen: nur Lektion 1 ist anfangs freigeschaltet
+await klick('Entgeltumwandlung');
+erwarte('Die Grundidee');
 if (schloesser() !== 4) throw new Error(`Erwartet 4 gesperrte Lektionen, gefunden: ${schloesser()}`);
 console.log('✓ Lektionen 2–5 anfangs gesperrt');
 
@@ -70,13 +75,18 @@ for (let i = 3; i <= 5; i++) {
 await klick('Lektion abschließen');
 erwarte('Lektion geschafft!');
 
-// Zurück zur Übersicht: Lektion erledigt, Lektion 2 freigeschaltet, XP und Streak sichtbar
+// Zurück zur Welt: Lektion erledigt, Lektion 2 freigeschaltet
 await klick('Zur Übersicht');
 erwarte('✅ Die Grundidee');
 if (schloesser() !== 3) throw new Error(`Lektion 2 sollte frei sein, gesperrt: ${schloesser()}`);
 console.log('✓ Lektion 2 nach Abschluss freigeschaltet');
+
+// Zurück zur Startseite: Fortschritt, Streak und XP sichtbar
+await klick('Zurück');
+erwarte('Themenwelten');
+erwarte('1/5 Lektionen');
 erwarte('🔥 1 Tage');
-const xp = text().match(/⭐ (\d+) XP/);
+const xp = text().match(/⭐ (\d+)/);
 console.log(`✓ XP gesammelt: ${xp[1]}`);
 if (Number(xp[1]) <= 0) throw new Error('Keine XP gutgeschrieben');
 

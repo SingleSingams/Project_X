@@ -1,0 +1,109 @@
+{
+  "weltId": "betravg",
+  "icon": "📜",
+  "titel": "BetrAVG-Basics",
+  "beschreibung": "Das Betriebsrentengesetz von Einstandspflicht bis Unverfallbarkeit.",
+  "lektionen": [
+    {
+      "id": "bg-1",
+      "titel": "Das Gesetz im Überblick",
+      "fragen": [
+        {
+          "typ": "multiple-choice",
+          "frage": "Wofür steht die Abkürzung BetrAVG?",
+          "antworten": [
+            "Gesetz zur Verbesserung der betrieblichen Altersversorgung",
+            "Betriebliches Arbeitsvertragsgesetz",
+            "Betriebsrenten-Abgabenverordnung",
+            "Verordnung über betriebliche Versorgungsgutachten"
+          ],
+          "richtig": 0,
+          "erklaerung": "Das „Gesetz zur Verbesserung der betrieblichen Altersversorgung“ – kurz Betriebsrentengesetz – ist das Grundgesetz der bAV. Es regelt Zusagearten, Unverfallbarkeit, Insolvenzschutz und vieles mehr."
+        },
+        {
+          "typ": "multiple-choice",
+          "frage": "Seit wann gibt es das BetrAVG?",
+          "antworten": ["1974", "1957", "1990", "2002"],
+          "richtig": 0,
+          "erklaerung": "Das BetrAVG stammt vom 19. Dezember 1974 – die bAV selbst ist natürlich viel älter, aber erst seit damals gibt es den umfassenden gesetzlichen Schutzrahmen."
+        },
+        {
+          "typ": "mythos-fakt",
+          "aussage": "Der Arbeitgeber haftet für die zugesagte Leistung auch dann, wenn er einen externen Versorgungsträger einschaltet.",
+          "istFakt": true,
+          "erklaerung": "Fakt – die berühmte Einstandspflicht (§ 1 Abs. 1 Satz 3 BetrAVG): Der Arbeitgeber steht für die Erfüllung der Zusage ein, auch wenn Versicherer, Pensionskasse oder Pensionsfonds zwischengeschaltet sind."
+        },
+        {
+          "typ": "schaetz-slider",
+          "frage": "Wie viele Durchführungswege kennt die bAV?",
+          "min": 1,
+          "max": 8,
+          "einheit": "",
+          "richtig": 5,
+          "toleranz": 0,
+          "erklaerung": "Fünf: Direktzusage, Unterstützungskasse, Direktversicherung, Pensionskasse und Pensionsfonds. Mehr dazu in der eigenen Themenwelt."
+        },
+        {
+          "typ": "mythos-fakt",
+          "aussage": "Das BetrAVG gilt nur für klassische Arbeitnehmer – Geschäftsführer können nie darunter fallen.",
+          "istFakt": false,
+          "erklaerung": "Mythos! § 17 BetrAVG erweitert den Schutz auch auf arbeitnehmerähnliche Personen. Bei (beherrschenden) Gesellschafter-Geschäftsführern wird es allerdings differenziert – ein Klassiker der Beratungspraxis."
+        }
+      ]
+    },
+    {
+      "id": "bg-2",
+      "titel": "Unverfallbarkeit & Schutz",
+      "fragen": [
+        {
+          "typ": "multiple-choice",
+          "frage": "Wann werden arbeitgeberfinanzierte Neuzusagen (seit 2018) gesetzlich unverfallbar?",
+          "antworten": [
+            "Nach 3 Jahren Zusagedauer und Vollendung des 21. Lebensjahres",
+            "Sofort ab dem ersten Tag",
+            "Nach 10 Jahren Betriebszugehörigkeit",
+            "Erst mit Renteneintritt"
+          ],
+          "richtig": 0,
+          "erklaerung": "§ 1b BetrAVG: Drei Jahre Zusagedauer plus Mindestalter 21 (für Zusagen ab 2018; ältere Zusagen hatten längere Fristen). Wer vorher geht, verliert die arbeitgeberfinanzierte Anwartschaft."
+        },
+        {
+          "typ": "mythos-fakt",
+          "aussage": "Durch Entgeltumwandlung finanzierte Anwartschaften sind sofort gesetzlich unverfallbar.",
+          "istFakt": true,
+          "erklaerung": "Fakt – dein eigenes Geld ist sofort geschützt (§ 1b Abs. 5 BetrAVG). Die Fristen gelten nur für arbeitgeberfinanzierte Zusagen."
+        },
+        {
+          "typ": "multiple-choice",
+          "frage": "Was muss der Arbeitgeber nach § 16 BetrAVG alle drei Jahre prüfen?",
+          "antworten": [
+            "Die Anpassung der laufenden Betriebsrenten",
+            "Die Bonität des Versicherers",
+            "Die Beitragshöhe der aktiven Mitarbeiter",
+            "Das Renteneintrittsalter"
+          ],
+          "richtig": 0,
+          "erklaerung": "Die Anpassungsprüfungspflicht: Laufende Renten sollen ihre Kaufkraft behalten. Es gibt Ausnahmen, z. B. die 1-%-Anpassungsgarantie oder Überschussverwendung bei versicherungsförmigen Wegen."
+        },
+        {
+          "typ": "mythos-fakt",
+          "aussage": "Wenn es der Firma wirtschaftlich schlecht geht, darf sie eine laufende Betriebsrente einfach streichen.",
+          "istFakt": false,
+          "erklaerung": "Mythos! Laufende Renten und erdiente Besitzstände sind stark geschützt; Eingriffe sind nur in sehr engen Grenzen möglich. Bei Insolvenz springt der Pensions-Sicherungs-Verein ein."
+        },
+        {
+          "typ": "multiple-choice",
+          "frage": "Wer sichert Direktzusagen und Unterstützungskassen bei Insolvenz des Arbeitgebers ab?",
+          "antworten": [
+            "Der Pensions-Sicherungs-Verein (PSVaG)",
+            "Die Bundesagentur für Arbeit",
+            "Die Deutsche Rentenversicherung",
+            "Niemand – das Risiko trägt der Arbeitnehmer"
+          ],
+          "richtig": 0,
+          "erklaerung": "Der PSVaG ist die gesetzliche Insolvenzsicherung der bAV; finanziert über Pflichtbeiträge der Arbeitgeber. Versicherungsförmige Wege brauchen ihn (mit Ausnahmen) nicht, weil das Kapital beim Versicherer liegt."
+        }
+      ]
+    }
+  ]
+}

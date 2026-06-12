@@ -1,7 +1,7 @@
-import welt from '../data/entgeltumwandlung.json';
+import { welten } from '../data/welten.js';
 
-// Alle Fragen aller Welten in einen Pool legen (später einfach weitere Welten importieren)
-const fragenPool = welt.lektionen.flatMap((l) => l.fragen);
+// Alle Fragen aller Welten bilden den Daily-Pool
+const fragenPool = welten.flatMap((w) => w.lektionen.flatMap((l) => l.fragen));
 
 // Einfacher deterministischer Hash, damit alle Spieler am selben Tag
 // dieselbe Frage sehen – ganz ohne Server
