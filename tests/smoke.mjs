@@ -34,7 +34,7 @@ erwarte('RentenHeld');
 erwarte('Daily Challenge');
 erwarte('Themenwelten');
 erwarte('Entgeltumwandlung');
-erwarte('BetrAVG-Basics');
+erwarte('Das BetrAVG');
 erwarte('Berühmte Urteile');
 erwarte('Bald verfügbar');
 

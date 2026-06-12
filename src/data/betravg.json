@@ -1,8 +1,8 @@
 {
   "weltId": "betravg",
   "icon": "📜",
-  "titel": "BetrAVG-Basics",
-  "beschreibung": "Das Betriebsrentengesetz von Einstandspflicht bis Unverfallbarkeit.",
+  "titel": "Das BetrAVG",
+  "beschreibung": "Schritt für Schritt durchs Betriebsrentengesetz – vom Überblick bis zur Quotierung.",
   "lektionen": [
     {
       "id": "bg-1",
@@ -102,6 +102,164 @@
           ],
           "richtig": 0,
           "erklaerung": "Der PSVaG ist die gesetzliche Insolvenzsicherung der bAV; finanziert über Pflichtbeiträge der Arbeitgeber. Versicherungsförmige Wege brauchen ihn (mit Ausnahmen) nicht, weil das Kapital beim Versicherer liegt."
+        }
+      ]
+    },
+    {
+      "id": "bg-3",
+      "titel": "Die Zusagearten",
+      "fragen": [
+        {
+          "typ": "multiple-choice",
+          "frage": "Der Arbeitgeber verspricht eine feste Leistungshöhe, z. B. 100 € Rente pro Dienstjahr. Welche Zusageart ist das?",
+          "antworten": [
+            "Die (reine) Leistungszusage",
+            "Die Beitragszusage mit Mindestleistung",
+            "Die reine Beitragszusage",
+            "Die Gehaltszusage"
+          ],
+          "richtig": 0,
+          "erklaerung": "Der Klassiker: Bei der Leistungszusage steht die Leistung fest, das gesamte Finanzierungsrisiko liegt beim Arbeitgeber. Heute werden Neuzusagen meist anders gestaltet – verstehen muss man sie trotzdem, der Bestand ist riesig."
+        },
+        {
+          "typ": "multiple-choice",
+          "frage": "Was kennzeichnet die beitragsorientierte Leistungszusage (boLZ)?",
+          "antworten": [
+            "Der Arbeitgeber verpflichtet sich, bestimmte Beiträge in eine Anwartschaft umzuwandeln",
+            "Der Arbeitgeber schuldet gar nichts",
+            "Die Leistung richtet sich nach dem letzten Gehalt",
+            "Es gibt nur Kapital-, nie Rentenleistungen"
+          ],
+          "richtig": 0,
+          "erklaerung": "§ 1 Abs. 2 Nr. 1 BetrAVG: Aus zugesagten Beiträgen wird nach einer festgelegten Umrechnung eine Leistung. Die boLZ ist heute die in der Praxis dominierende Zusageart."
+        },
+        {
+          "typ": "mythos-fakt",
+          "aussage": "Bei der Beitragszusage mit Mindestleistung garantiert der Arbeitgeber zum Rentenbeginn mindestens die eingezahlten Beiträge, soweit sie nicht für Risikoschutz verbraucht wurden.",
+          "istFakt": true,
+          "erklaerung": "Fakt – § 1 Abs. 2 Nr. 2 BetrAVG. Die BZML ist nur in den versicherungsförmigen Wegen (DV, PK, PF) möglich: Planvermögen plus Beitragserhaltungsgarantie."
+        },
+        {
+          "typ": "mythos-fakt",
+          "aussage": "Die reine Beitragszusage kann jeder Arbeitgeber frei im Arbeitsvertrag vereinbaren.",
+          "istFakt": false,
+          "erklaerung": "Mythos! Die reine Beitragszusage gibt es nur im Sozialpartnermodell, also auf tariflicher Grundlage. Ohne Tarifbindung führt der Weg nur über Bezugnahme auf einen einschlägigen Tarifvertrag."
+        },
+        {
+          "typ": "schaetz-slider",
+          "frage": "Wie viele Zusagearten unterscheidet das BetrAVG insgesamt (inklusive reiner Beitragszusage)?",
+          "min": 1,
+          "max": 8,
+          "einheit": "",
+          "richtig": 4,
+          "toleranz": 0,
+          "erklaerung": "Vier: Leistungszusage, beitragsorientierte Leistungszusage, Beitragszusage mit Mindestleistung und – seit 2018 – die reine Beitragszusage im Sozialpartnermodell."
+        }
+      ]
+    },
+    {
+      "id": "bg-4",
+      "titel": "Abfindung & Mitnahme",
+      "fragen": [
+        {
+          "typ": "mythos-fakt",
+          "aussage": "Eine unverfallbare Anwartschaft darf beim Ausscheiden einfach gegen eine Einmalzahlung abgefunden werden, wenn beide Seiten einverstanden sind.",
+          "istFakt": false,
+          "erklaerung": "Mythos! § 3 BetrAVG enthält ein grundsätzliches Abfindungsverbot – Versorgung soll Versorgung bleiben. Nur in engen Ausnahmen ist eine Abfindung zulässig."
+        },
+        {
+          "typ": "multiple-choice",
+          "frage": "Wann darf eine unverfallbare Anwartschaft ausnahmsweise abgefunden werden?",
+          "antworten": [
+            "Bei Kleinstanwartschaften unterhalb der Bagatellgrenze",
+            "Immer, wenn der Arbeitnehmer es schriftlich verlangt",
+            "Wenn der Arbeitgeber den Betrieb umbenennt",
+            "Nie, ohne Ausnahme"
+          ],
+          "richtig": 0,
+          "erklaerung": "Die wichtigste Ausnahme: Bagatellanwartschaften (bei Monatsrenten 1 % der monatlichen Bezugsgröße, bei Kapital das 12/10-fache) darf der Arbeitgeber einseitig abfinden. Die Bezugsgröße ändert sich jährlich."
+        },
+        {
+          "typ": "multiple-choice",
+          "frage": "Was regelt § 4 BetrAVG?",
+          "antworten": [
+            "Die Übertragung von Anwartschaften beim Arbeitgeberwechsel (Portabilität)",
+            "Die Höhe des Arbeitgeberzuschusses",
+            "Das Renteneintrittsalter",
+            "Die Besteuerung der Betriebsrente"
+          ],
+          "richtig": 0,
+          "erklaerung": "§ 4 BetrAVG ist die Portabilitätsnorm: einvernehmliche Übertragung ist breit möglich, und in den versicherungsförmigen Wegen gibt es sogar einen echten Rechtsanspruch auf Mitnahme."
+        },
+        {
+          "typ": "mythos-fakt",
+          "aussage": "Bei Direktversicherung, Pensionskasse und Pensionsfonds besteht ein Rechtsanspruch auf Übertragung zum neuen Arbeitgeber, wenn der Übertragungswert die Beitragsbemessungsgrenze nicht übersteigt.",
+          "istFakt": true,
+          "erklaerung": "Fakt – § 4 Abs. 3 BetrAVG. Der neue Arbeitgeber muss dann eine wertgleiche Zusage über einen der drei versicherungsförmigen Wege erteilen."
+        },
+        {
+          "typ": "schaetz-slider",
+          "frage": "Innerhalb wie vieler Monate nach Ende des alten Arbeitsverhältnisses muss der Übertragungsanspruch geltend gemacht werden?",
+          "min": 1,
+          "max": 36,
+          "einheit": "Monate",
+          "richtig": 12,
+          "toleranz": 0,
+          "erklaerung": "Ein Jahr (§ 4 Abs. 3 BetrAVG). Wer die Frist verpasst, ist auf eine einvernehmliche Lösung angewiesen – ein Punkt, der in der Beratung gern untergeht."
+        }
+      ]
+    },
+    {
+      "id": "bg-5",
+      "titel": "Ausscheiden & Quotierung",
+      "fragen": [
+        {
+          "typ": "multiple-choice",
+          "frage": "Wie wird die unverfallbare Anwartschaft aus einer Leistungszusage beim vorzeitigen Ausscheiden berechnet (§ 2 BetrAVG)?",
+          "antworten": [
+            "Zeitanteilig: tatsächliche Dienstzeit geteilt durch mögliche Dienstzeit bis zur Altersgrenze",
+            "Es zählt immer die volle zugesagte Leistung",
+            "Pauschal 50 % der Zusage",
+            "Nach dem letzten Bruttogehalt mal Faktor 10"
+          ],
+          "richtig": 0,
+          "erklaerung": "Das ratierliche oder m/n-tel-Verfahren: erreichte Dienstjahre (m) zu möglichen Dienstjahren bis zur festen Altersgrenze (n). Wer zur Hälfte der möglichen Zeit geht, behält die halbe Vollleistung."
+        },
+        {
+          "typ": "mythos-fakt",
+          "aussage": "Bei Anwartschaften aus Entgeltumwandlung wird beim Ausscheiden nicht quotiert – es bleibt die bis dahin aufgebaute Leistung erhalten.",
+          "istFakt": true,
+          "erklaerung": "Fakt – hier gilt das Prinzip der erreichten Anwartschaft: Was aus den eigenen Beiträgen bis zum Ausscheiden aufgebaut wurde, bleibt vollständig bestehen. Eine m/n-tel-Kürzung wäre auch unlogisch."
+        },
+        {
+          "typ": "multiple-choice",
+          "frage": "Worauf gibt § 6 BetrAVG einen Anspruch?",
+          "antworten": [
+            "Auf vorgezogene Betriebsrente, wenn die gesetzliche Rente vorzeitig als Vollrente bezogen wird",
+            "Auf einen Firmenwagen im Ruhestand",
+            "Auf Nachzahlung entgangener Boni",
+            "Auf Verdopplung der Rente ab 80"
+          ],
+          "richtig": 0,
+          "erklaerung": "Wer die gesetzliche Rente vorzeitig als Vollrente in Anspruch nimmt, kann auch die Betriebsrente vorgezogen verlangen – meist mit versicherungsmathematischen oder ratierlichen Abschlägen."
+        },
+        {
+          "typ": "mythos-fakt",
+          "aussage": "Laufende Betriebsrenten dürfen gekürzt werden, indem spätere Erhöhungen der gesetzlichen Rente angerechnet werden.",
+          "istFakt": false,
+          "erklaerung": "Mythos! Genau das verbietet das Auszehrungs- und Anrechnungsverbot des § 5 BetrAVG. Die Betriebsrente darf nicht durch nachträgliche Anrechnung anderer Versorgungsbezüge ausgehöhlt werden."
+        },
+        {
+          "typ": "multiple-choice",
+          "frage": "In welchen Paragrafen des BetrAVG ist die Insolvenzsicherung über den PSV geregelt?",
+          "antworten": [
+            "§§ 7 bis 15",
+            "§§ 1 bis 3",
+            "§ 16",
+            "§ 30"
+          ],
+          "richtig": 0,
+          "erklaerung": "Die §§ 7–15 regeln Sicherungsfall, geschützte Personen, Beitragspflicht und Leistungsumfang des Pensions-Sicherungs-Vereins – ein eigener kleiner Kosmos im Gesetz."
         }
       ]
     }
