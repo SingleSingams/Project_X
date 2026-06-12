@@ -34,6 +34,11 @@ erwarte('Daily Challenge');
 erwarte('Entgeltumwandlung');
 erwarte('Die Grundidee');
 
+// Nur Lektion 1 ist anfangs freigeschaltet
+const schloesser = () => (text().match(/🔒/g) || []).length;
+if (schloesser() !== 4) throw new Error(`Erwartet 4 gesperrte Lektionen, gefunden: ${schloesser()}`);
+console.log('✓ Lektionen 2–5 anfangs gesperrt');
+
 // Lektion 1 starten
 await klick('Start');
 erwarte('Frage 1 von 5');
@@ -65,9 +70,11 @@ for (let i = 3; i <= 5; i++) {
 await klick('Lektion abschließen');
 erwarte('Lektion geschafft!');
 
-// Zurück zur Übersicht: Lektion erledigt, XP und Streak sichtbar
+// Zurück zur Übersicht: Lektion erledigt, Lektion 2 freigeschaltet, XP und Streak sichtbar
 await klick('Zur Übersicht');
 erwarte('✅ Die Grundidee');
+if (schloesser() !== 3) throw new Error(`Lektion 2 sollte frei sein, gesperrt: ${schloesser()}`);
+console.log('✓ Lektion 2 nach Abschluss freigeschaltet');
 erwarte('🔥 1 Tage');
 const xp = text().match(/⭐ (\d+) XP/);
 console.log(`✓ XP gesammelt: ${xp[1]}`);

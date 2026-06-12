@@ -42,9 +42,18 @@ Startpunkt. Vor jeder Veröffentlichung gilt:
 - Pro Frage intern eine Quelle notieren, damit der Jahres-Review schnell geht.
 - Disclaimer („keine Rechts-/Steuerberatung") bleibt immer sichtbar.
 
+## Deployment
+
+Ein GitHub-Actions-Workflow (`.github/workflows/deploy.yml`) baut die App und
+veröffentlicht sie auf GitHub Pages – bei jedem Push auf `main`, inklusive
+Smoke-Test als Wächter. Einmalig nötig: in den Repo-Einstellungen unter
+**Settings → Pages** als Source „GitHub Actions" wählen.
+
 ## Nächste Schritte (siehe KONZEPT.md)
 
-- [ ] 20+ Fragen schreiben und mit Kollegen testen (Woche 1!)
-- [ ] Welt „Entgeltumwandlung" auf 5 Lektionen ausbauen
-- [ ] Hosting aufsetzen (Netlify/Vercel/GitHub Pages)
-- [ ] Share-Schnipsel der Daily Challenge mit echter URL testen
+- [x] Welt „Entgeltumwandlung" auf 5 Lektionen ausbauen (25 Fragen)
+- [x] Lektionen schalten sich nacheinander frei
+- [x] Deploy-Workflow für GitHub Pages
+- [ ] Fragen fachlich reviewen und mit Kollegen testen (Woche 1!)
+- [ ] Pages in den Repo-Einstellungen aktivieren, Share-Link live testen
+- [ ] Zweite Welt („Grundlagen" oder „Mythen-Welt") anlegen

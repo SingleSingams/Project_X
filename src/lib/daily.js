@@ -23,7 +23,7 @@ export function shareText(datumsString, richtig) {
   return (
     `RentenHeld-Daily ${tag}.${monat}.${jahr} ${ergebnis}\n` +
     `Wie gut kennst DU dich mit deiner Betriebsrente aus?\n` +
-    window.location.origin
+    window.location.origin + window.location.pathname
   );
 }
 
