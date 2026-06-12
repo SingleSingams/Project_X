@@ -1,0 +1,60 @@
+{
+  "weltId": "mathematik",
+  "icon": "🧮",
+  "titel": "Barwerte & Gutachten",
+  "beschreibung": "Versicherungsmathematik ohne Schmerzen: Barwert, Rechnungszins, Richttafeln.",
+  "lektionen": [
+    {
+      "id": "ma-1",
+      "titel": "Barwert verstehen",
+      "fragen": [
+        {
+          "typ": "multiple-choice",
+          "frage": "Was ist der Barwert einer künftigen Rentenverpflichtung?",
+          "antworten": [
+            "Der heutige Wert aller künftigen Zahlungen, abgezinst mit dem Rechnungszins",
+            "Die Summe aller künftigen Zahlungen ohne Abzinsung",
+            "Der aktuelle Kontostand des Versorgungskontos",
+            "Die letzte gezahlte Monatsrente mal zwölf"
+          ],
+          "richtig": 0,
+          "erklaerung": "Der Barwert beantwortet die Frage: „Wie viel müsste heute zurückgelegt sein, um alle künftigen Zahlungen leisten zu können?“ – unter Berücksichtigung von Zins und Biometrie (Sterblichkeit, Invalidität …)."
+        },
+        {
+          "typ": "mythos-fakt",
+          "aussage": "Je niedriger der Rechnungszins, desto höher der Barwert einer Verpflichtung.",
+          "istFakt": true,
+          "erklaerung": "Fakt – und der Hebel ist enorm. Genau deshalb haben die Niedrigzinsjahre die Pensionsrückstellungen vieler Unternehmen explodieren lassen."
+        },
+        {
+          "typ": "multiple-choice",
+          "frage": "Welche biometrischen Rechnungsgrundlagen sind in Deutschland für Pensionsverpflichtungen der Standard?",
+          "antworten": [
+            "Die Heubeck-Richttafeln",
+            "Die DAX-Sterbetafeln",
+            "Die Gauß-Tabellen",
+            "Die Bundesanzeiger-Tafeln"
+          ],
+          "richtig": 0,
+          "erklaerung": "Die Heubeck-Richttafeln (aktuell RT 2018 G) liefern Wahrscheinlichkeiten für Tod, Invalidität und Verheiratung – die Basis fast jedes versicherungsmathematischen Gutachtens in Deutschland."
+        },
+        {
+          "typ": "schaetz-slider",
+          "frage": "Mit welchem starren Rechnungszins müssen Pensionsrückstellungen in der Steuerbilanz (§ 6a EStG) bewertet werden?",
+          "min": 0,
+          "max": 10,
+          "einheit": "%",
+          "richtig": 6,
+          "toleranz": 0,
+          "erklaerung": "6 % – seit Jahrzehnten unverändert und weit über dem Marktniveau. In der Handelsbilanz gilt dagegen ein gleitender Durchschnittsmarktzins; die Lücke zwischen beiden Werten ist ein Dauerthema."
+        },
+        {
+          "typ": "mythos-fakt",
+          "aussage": "Versicherungsmathematische Gutachten spielen vor allem bei Direktzusagen und Unterstützungskassen eine Rolle.",
+          "istFakt": true,
+          "erklaerung": "Fakt – dort müssen Rückstellungen bzw. Zuwendungen jährlich aktuariell bewertet werden. Bei versicherungsförmigen Wegen übernimmt der Versicherer die Kalkulation."
+        }
+      ]
+    }
+  ]
+}

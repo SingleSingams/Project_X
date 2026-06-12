@@ -1,0 +1,56 @@
+{
+  "weltId": "rechtsprechung",
+  "icon": "⚖️",
+  "titel": "Berühmte Urteile",
+  "beschreibung": "Von Barber bis Drei-Stufen-Theorie – Rechtsprechung, die die bAV geprägt hat.",
+  "lektionen": [
+    {
+      "id": "rs-1",
+      "titel": "Urteile, die man kennen muss",
+      "fragen": [
+        {
+          "typ": "multiple-choice",
+          "frage": "Worum ging es im berühmten Barber-Urteil des EuGH (1990)?",
+          "antworten": [
+            "Betriebsrenten sind Entgelt – Männer und Frauen müssen gleich behandelt werden",
+            "Friseure haben Anspruch auf eine Zusatzrente",
+            "Betriebsrenten dürfen nicht besteuert werden",
+            "Arbeitgeber müssen jedem eine bAV anbieten"
+          ],
+          "richtig": 0,
+          "erklaerung": "Rs. C-262/88: Der EuGH stellte klar, dass Betriebsrenten Entgelt im Sinne des EG-Vertrags sind. Unterschiedliche Altersgrenzen für Männer und Frauen in Betriebsrentensystemen waren damit unzulässig – ein Meilenstein."
+        },
+        {
+          "typ": "mythos-fakt",
+          "aussage": "Das Barber-Urteil wirkt zeitlich unbegrenzt zurück – auch für Beschäftigungszeiten lange vor 1990.",
+          "istFakt": false,
+          "erklaerung": "Mythos! Wegen der enormen finanziellen Folgen wurde die Wirkung grundsätzlich auf Beschäftigungszeiten ab der Urteilsverkündung (17. Mai 1990) begrenzt – später im „Barber-Protokoll“ zum Maastricht-Vertrag festgeschrieben."
+        },
+        {
+          "typ": "multiple-choice",
+          "frage": "Mit welchem Prüfschema beurteilt das Bundesarbeitsgericht Eingriffe in Versorgungsanwartschaften?",
+          "antworten": [
+            "Mit der Drei-Stufen-Theorie",
+            "Mit dem Vier-Augen-Prinzip",
+            "Mit der Fünf-Faktoren-Formel",
+            "Mit dem Ampelmodell"
+          ],
+          "richtig": 0,
+          "erklaerung": "Die Drei-Stufen-Theorie: Je stärker der Eingriff (erdienter Besitzstand → erdiente Dynamik → künftige Zuwächse), desto gewichtiger müssen die Gründe des Arbeitgebers sein. Pflichtwissen für jede Plananpassung."
+        },
+        {
+          "typ": "mythos-fakt",
+          "aussage": "Teilzeitkräfte dürfen von der betrieblichen Altersversorgung nicht allein wegen ihrer Teilzeit ausgeschlossen werden.",
+          "istFakt": true,
+          "erklaerung": "Fakt – das wäre eine unzulässige Diskriminierung (und trifft mittelbar oft Frauen). Üblich und zulässig ist eine zeitanteilige (pro-rata) Berücksichtigung."
+        },
+        {
+          "typ": "mythos-fakt",
+          "aussage": "Wartezeiten – etwa eine Versorgungszusage erst nach einigen Jahren Betriebszugehörigkeit – sind grundsätzlich zulässig.",
+          "istFakt": true,
+          "erklaerung": "Fakt – Wartezeiten sind ein anerkanntes Gestaltungsmittel. Sie dürfen aber nicht diskriminierend wirken, und die Unverfallbarkeitsfristen laufen unabhängig davon."
+        }
+      ]
+    }
+  ]
+}

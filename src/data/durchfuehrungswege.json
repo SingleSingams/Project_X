@@ -1,0 +1,62 @@
+{
+  "weltId": "durchfuehrungswege",
+  "icon": "🛤️",
+  "titel": "Durchführungswege",
+  "beschreibung": "Fünf Wege zum gleichen Ziel – und ihre Unterschiede.",
+  "lektionen": [
+    {
+      "id": "dw-1",
+      "titel": "Die fünf Wege",
+      "fragen": [
+        {
+          "typ": "multiple-choice",
+          "frage": "Welche Aufzählung enthält NUR Durchführungswege der bAV?",
+          "antworten": [
+            "Direktzusage, Unterstützungskasse, Direktversicherung, Pensionskasse, Pensionsfonds",
+            "Riester, Rürup, Direktversicherung, ETF-Sparplan",
+            "Direktzusage, Bausparvertrag, Pensionskasse",
+            "Lebensversicherung, Tagesgeld, Pensionsfonds"
+          ],
+          "richtig": 0,
+          "erklaerung": "Die fünf klassischen Wege. Merkhilfe: zwei interne (Direktzusage, U-Kasse) und drei versicherungsförmige externe (Direktversicherung, Pensionskasse, Pensionsfonds)."
+        },
+        {
+          "typ": "mythos-fakt",
+          "aussage": "Bei der Direktzusage zahlt der Arbeitgeber die Rente später direkt aus dem Unternehmen.",
+          "istFakt": true,
+          "erklaerung": "Fakt – deshalb bildet er dafür Pensionsrückstellungen in der Bilanz. Die Direktzusage ist gemessen am Volumen traditionell der größte Durchführungsweg in Deutschland."
+        },
+        {
+          "typ": "multiple-choice",
+          "frage": "Was ist die klassische Besonderheit der Unterstützungskasse?",
+          "antworten": [
+            "Sie gewährt formal keinen Rechtsanspruch auf ihre Leistungen",
+            "Sie darf nur Beamte versorgen",
+            "Sie ist eine Abteilung der Rentenversicherung",
+            "Sie zahlt grundsätzlich nur Kapital, nie Rente"
+          ],
+          "richtig": 0,
+          "erklaerung": "Die U-Kasse gewährt formal keinen Rechtsanspruch – praktisch ist das durch die Einstandspflicht des Arbeitgebers aber kein Nachteil: Er muss im Zweifel selbst leisten."
+        },
+        {
+          "typ": "mythos-fakt",
+          "aussage": "Ein Pensionsfonds darf freier am Kapitalmarkt anlegen als eine klassische Pensionskasse.",
+          "istFakt": true,
+          "erklaerung": "Fakt – der Pensionsfonds wurde 2002 genau dafür geschaffen: mehr Renditechancen durch freiere Kapitalanlage, dafür weniger starre Garantien."
+        },
+        {
+          "typ": "multiple-choice",
+          "frage": "Was ist das Besondere am Sozialpartnermodell (seit 2018)?",
+          "antworten": [
+            "Reine Beitragszusage: Der Arbeitgeber schuldet nur den Beitrag, keine Leistungshöhe",
+            "Es garantiert eine Mindestrente von 1.000 €",
+            "Es ist nur für Beamte zugänglich",
+            "Der Staat übernimmt alle Beiträge"
+          ],
+          "richtig": 0,
+          "erklaerung": "„Pay and forget“: Bei der reinen Beitragszusage gibt es keine garantierte Leistung – dafür höhere Renditechancen. Möglich nur auf tariflicher Grundlage, eingeführt durch das Betriebsrentenstärkungsgesetz."
+        }
+      ]
+    }
+  ]
+}
