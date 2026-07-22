@@ -1,0 +1,1178 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adria-Kompass – Kroatien interaktiv</title>
+</head>
+<body>
+<style>
+  :root {
+    --adria: #0E7C86;
+    --adria-tief: #0A5D65;
+    --rot: #C9392F;
+    --ground: #F4F7F7;
+    --card: #FFFFFF;
+    --ink: #17272E;
+    --muted: #5A6E74;
+    --line: #DCE6E7;
+    --chip: #E7EFEF;
+    --gratis: #2F8F5B;
+    --shadow: 0 1px 3px rgba(23, 39, 46, 0.08);
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --adria: #3FB0BA;
+      --adria-tief: #2E8E97;
+      --rot: #E05A50;
+      --ground: #0D181D;
+      --card: #14232A;
+      --ink: #E8F0F1;
+      --muted: #93A6AB;
+      --line: #23343B;
+      --chip: #1C2E36;
+      --gratis: #5BBE8A;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    }
+  }
+  :root[data-theme="light"] {
+    --adria: #0E7C86;
+    --adria-tief: #0A5D65;
+    --rot: #C9392F;
+    --ground: #F4F7F7;
+    --card: #FFFFFF;
+    --ink: #17272E;
+    --muted: #5A6E74;
+    --line: #DCE6E7;
+    --chip: #E7EFEF;
+    --gratis: #2F8F5B;
+    --shadow: 0 1px 3px rgba(23, 39, 46, 0.08);
+  }
+  :root[data-theme="dark"] {
+    --adria: #3FB0BA;
+    --adria-tief: #2E8E97;
+    --rot: #E05A50;
+    --ground: #0D181D;
+    --card: #14232A;
+    --ink: #E8F0F1;
+    --muted: #93A6AB;
+    --line: #23343B;
+    --chip: #1C2E36;
+    --gratis: #5BBE8A;
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-text-size-adjust: 100%;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 14px 80px; }
+
+  /* Kopf mit Šahovnica-Streifen */
+  .sahovnica {
+    height: 8px;
+    background:
+      repeating-conic-gradient(var(--rot) 0% 25%, transparent 0% 50%)
+      0 0 / 16px 16px;
+  }
+  header.kopf { padding: 22px 0 14px; }
+  header.kopf h1 {
+    font-family: var(--serif);
+    font-size: 1.9rem;
+    margin: 0 0 2px;
+    letter-spacing: 0.01em;
+    text-wrap: balance;
+  }
+  header.kopf h1 .kompass { color: var(--adria); }
+  header.kopf p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+
+  .label {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  /* Filterkarte */
+  .filter {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .filter select {
+    width: 100%;
+    font-size: 1rem;
+    font-family: var(--sans);
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: var(--ground);
+    color: var(--ink);
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chips button {
+    font-family: var(--sans);
+    font-size: 0.86rem;
+    padding: 7px 13px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--chip);
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .chips button[aria-pressed="true"] {
+    background: var(--adria);
+    border-color: var(--adria);
+    color: #fff;
+  }
+  .chips button:focus-visible,
+  .tabs button:focus-visible,
+  .filter select:focus-visible,
+  details summary:focus-visible {
+    outline: 2px solid var(--adria);
+    outline-offset: 2px;
+  }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    gap: 6px;
+    border-bottom: 2px solid var(--line);
+    margin-bottom: 16px;
+  }
+  .tabs button {
+    flex: 1;
+    font-family: var(--sans);
+    font-size: 0.92rem;
+    font-weight: 600;
+    padding: 10px 4px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    color: var(--muted);
+    cursor: pointer;
+  }
+  .tabs button[aria-selected="true"] {
+    color: var(--adria);
+    border-bottom-color: var(--adria);
+  }
+
+  .anzahl { color: var(--muted); font-size: 0.85rem; margin: 0 0 12px; }
+
+  /* Ausflugskarten */
+  .karten { display: flex; flex-direction: column; gap: 12px; }
+  .regionTitel {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    margin: 14px 0 2px;
+  }
+  .karte {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 14px 16px;
+  }
+  .karte .oben {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .karte h3 {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .dist {
+    white-space: nowrap;
+    font-size: 0.82rem;
+    color: var(--adria);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 10px; }
+  .tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: var(--chip);
+    color: var(--muted);
+  }
+  .tag.kat { background: var(--adria); color: #fff; }
+  .tag.gratis { background: var(--gratis); color: #fff; }
+  .karte p { margin: 0 0 8px; font-size: 0.94rem; }
+  .karte .zeile { font-size: 0.88rem; color: var(--muted); margin-bottom: 6px; }
+  .karte .zeile strong { color: var(--ink); font-weight: 600; }
+  .tipp {
+    border-left: 3px solid var(--rot);
+    padding: 4px 10px;
+    margin-top: 10px;
+    font-size: 0.88rem;
+    background: var(--chip);
+    border-radius: 0 8px 8px 0;
+  }
+
+  /* Stadt-Routen */
+  details.stadt {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  details.stadt summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+  }
+  details.stadt summary::-webkit-details-marker { display: none; }
+  details.stadt summary h3 {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    margin: 0;
+  }
+  details.stadt summary .dauer {
+    font-size: 0.8rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  details.stadt[open] summary { border-bottom: 1px solid var(--line); }
+  .routeInhalt { padding: 14px 16px; }
+  .start {
+    font-size: 0.9rem;
+    margin: 0 0 12px;
+  }
+  .start strong { color: var(--adria); }
+  ol.route { margin: 0; padding: 0 0 0 4px; list-style: none; counter-reset: schritt; }
+  ol.route li {
+    counter-increment: schritt;
+    position: relative;
+    padding: 0 0 14px 38px;
+  }
+  ol.route li::before {
+    content: counter(schritt);
+    position: absolute;
+    left: 0; top: 0;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--adria);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  ol.route li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 12.5px; top: 28px; bottom: 2px;
+    width: 1px;
+    background: var(--line);
+  }
+  ol.route .ort { font-weight: 600; }
+  ol.route .notiz { display: block; font-size: 0.88rem; color: var(--muted); }
+  .danach {
+    margin-top: 4px;
+    font-size: 0.88rem;
+    border-top: 1px dashed var(--line);
+    padding-top: 10px;
+  }
+
+  /* Praktisch */
+  .praktisch h3 {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    margin: 18px 0 6px;
+  }
+  .praktisch h3:first-child { margin-top: 0; }
+  .praktisch ul { margin: 0; padding-left: 20px; }
+  .praktisch li { margin-bottom: 6px; font-size: 0.94rem; }
+
+  .fussnote {
+    margin-top: 26px;
+    font-size: 0.8rem;
+    color: var(--muted);
+    border-top: 1px solid var(--line);
+    padding-top: 12px;
+  }
+  .leer {
+    text-align: center;
+    color: var(--muted);
+    padding: 30px 10px;
+    font-size: 0.95rem;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .karte, details.stadt { transition: border-color 0.15s ease; }
+  }
+</style>
+
+<div class="sahovnica" aria-hidden="true"></div>
+<div class="wrap">
+  <header class="kopf">
+    <h1>Adria-<span class="kompass">Kompass</span></h1>
+    <p>Dein interaktiver Kroatien-Führer – Ausflüge, Routen und Tipps, gefiltert auf deine Situation.</p>
+  </header>
+
+  <section class="filter" aria-label="Filter">
+    <div>
+      <span class="label">Wo bist du?</span>
+      <select id="ort"></select>
+    </div>
+    <div>
+      <span class="label">Wie bist du unterwegs? (mehrere möglich)</span>
+      <div class="chips" id="modi" role="group"></div>
+    </div>
+    <div>
+      <span class="label">Budget</span>
+      <div class="chips" id="budget" role="group"></div>
+    </div>
+    <div>
+      <span class="label">Kategorie</span>
+      <div class="chips" id="kategorie" role="group"></div>
+    </div>
+  </section>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" data-tab="ausfluege" aria-selected="true">Ausflüge</button>
+    <button role="tab" data-tab="routen" aria-selected="false">Städte &amp; Routen</button>
+    <button role="tab" data-tab="praktisch" aria-selected="false">Praktisch</button>
+  </nav>
+
+  <main id="inhalt"></main>
+
+  <p class="fussnote">
+    Preise sind ca.-Angaben (Stand Sommer 2026, Hochsaison) – vor Ort bzw. online
+    prüfen, besonders Nationalpark-Tickets und Katamaran-Fähren. Entfernungen sind
+    Luftlinie ab gewähltem Standort. Kein Anspruch auf Vollständigkeit – aber ein
+    verdammt guter Startpunkt.
+  </p>
+</div>
+
+<script>
+"use strict";
+
+/* ------------------------------ Daten ------------------------------ */
+
+const ORTE = [
+  { id: "zadar",     name: "Zadar",            lat: 44.1194, lng: 15.2314 },
+  { id: "split",     name: "Split",            lat: 43.5081, lng: 16.4402 },
+  { id: "dubrovnik", name: "Dubrovnik",        lat: 42.6410, lng: 18.1084 },
+  { id: "sibenik",   name: "Šibenik",          lat: 43.7350, lng: 15.8895 },
+  { id: "trogir",    name: "Trogir",           lat: 43.5170, lng: 16.2514 },
+  { id: "makarska",  name: "Makarska",         lat: 43.2969, lng: 17.0178 },
+  { id: "pula",      name: "Pula",             lat: 44.8666, lng: 13.8496 },
+  { id: "rovinj",    name: "Rovinj",           lat: 45.0812, lng: 13.6387 },
+  { id: "porec",     name: "Poreč",            lat: 45.2258, lng: 13.5936 },
+  { id: "rijeka",    name: "Rijeka / Opatija", lat: 45.3271, lng: 14.4422 },
+  { id: "zagreb",    name: "Zagreb",           lat: 45.8150, lng: 15.9819 },
+  { id: "alle",      name: "Ganz Kroatien (alles zeigen)" },
+];
+
+const KATEGORIEN = [
+  { id: "alle",        name: "Alle" },
+  { id: "natur",       name: "Natur & Parks" },
+  { id: "altstadt",    name: "Altstadt & Kultur" },
+  { id: "insel",       name: "Inseln & Boot" },
+  { id: "strand",      name: "Strände" },
+  { id: "aktiv",       name: "Action & Sport" },
+];
+
+const MODI = [
+  { id: "auto",   name: "Auto" },
+  { id: "opnv",   name: "Bus / Fähre / Tour" },
+  { id: "roller", name: "Roller" },
+  { id: "rad",    name: "Fahrrad" },
+  { id: "fuss",   name: "Nur zu Fuß" },
+];
+
+const BUDGETS = [
+  { id: 1, name: "Günstig (€)" },
+  { id: 2, name: "Mittel (€€)" },
+  { id: 3, name: "Egal (€€€)" },
+];
+
+// Reichweiten in km (einfache Strecke, Luftlinie)
+const RADIUS = { fuss: 4, rad: 30, roller: 45 };
+
+// preis: 0 = gratis, 1 = bis ~15 €, 2 = ~15–50 €, 3 = 50 €+
+const ZIELE = [
+  /* ---------- Norddalmatien (rund um Zadar) ---------- */
+  {
+    name: "Zadar: Meeresorgel & Gruß an die Sonne", region: "Norddalmatien",
+    lat: 44.1178, lng: 15.2216, kat: "altstadt", preis: 0, preisNote: "gratis",
+    dauer: "1–2 Std (abends)", opnv: true,
+    desc: "Die Meeresorgel macht aus Wellen Musik, daneben leuchtet der Sonnengruß nach Einbruch der Dunkelheit. Hitchcock nannte Zadars Sonnenuntergang den schönsten der Welt – er hatte recht.",
+    anreise: "Mitten in der Altstadt, an der Nordwestspitze der Halbinsel.",
+    tipp: "45 Minuten vor Sonnenuntergang hinsetzen, Platz an der Kante sichern. Danach Eis in der Kalelarga.",
+  },
+  {
+    name: "Nin: Königsstadt, Salzfelder & Queen's Beach", region: "Norddalmatien",
+    lat: 44.2411, lng: 15.1841, kat: "altstadt", preis: 1, preisNote: "Altstadt gratis, Salzmuseum ~5 €",
+    dauer: "Halber Tag", opnv: true,
+    desc: "Winzige Altstadt auf einer Mini-Insel, älteste Königsstadt Kroatiens. Daneben Sandstrand (selten in Kroatien!) mit Heilschlamm und Blick auf den Velebit.",
+    anreise: "15 km ab Zadar: Bus ~30 Min, perfekt auch mit Rad oder Roller über Flachland.",
+    tipp: "Kleinste Kathedrale der Welt (Heilig-Kreuz-Kirche) anschauen, dann Lavendel-Eis am Platz.",
+  },
+  {
+    name: "Nationalpark Paklenica", region: "Norddalmatien",
+    lat: 44.2966, lng: 15.4432, kat: "natur", preis: 1, preisNote: "~10–15 € Eintritt",
+    dauer: "Ganzer Tag", opnv: true,
+    desc: "Zwei spektakuläre Karst-Schluchten am Fuß des Velebit. Leichte Wanderung bis zur Berghütte oder Kletterparadies für Geübte – Europas Kletterszene trifft sich hier.",
+    anreise: "40 km ab Zadar: Auto/Roller ~45 Min, Bus Richtung Starigrad-Paklenica.",
+    tipp: "Früh starten (Parkplatz in der Schlucht ist schnell voll), Wasser mitnehmen – im Sommer wird es heiß.",
+  },
+  {
+    name: "Nationalpark Plitvicer Seen", region: "Norddalmatien",
+    lat: 44.8805, lng: 15.6167, kat: "natur", preis: 2, preisNote: "~40 € (Sommer), online mit Zeitfenster",
+    dauer: "Ganzer Tag", opnv: true,
+    desc: "16 türkise Seen, die über Travertin-Kaskaden ineinander stürzen – Kroatiens berühmtester Nationalpark und UNESCO-Welterbe. Die Holzstege mitten durchs Wasser sind einmalig.",
+    anreise: "115 km ab Zadar: Auto ~1:45 Std über die A1, Direktbusse ab Busbahnhof.",
+    tipp: "Ticket unbedingt vorher online buchen (Zeitfenster!). Eingang 2, Route ab 7–8 Uhr oder nach 15 Uhr – mittags stauen sich die Stege.",
+  },
+  {
+    name: "Nationalpark Krka (Wasserfälle)", region: "Norddalmatien",
+    lat: 43.8158, lng: 15.9256, kat: "natur", preis: 2, preisNote: "~40 € (Sommer)",
+    dauer: "Ganzer Tag", opnv: true,
+    desc: "Skradinski Buk: breite Wasserfall-Terrassen im grünen Flusstal, Rundweg über Stege und Mühlen. Weniger anstrengend als Plitvice und näher an der Küste.",
+    anreise: "60 km ab Zadar (Eingang Lozovac oder per Boot ab Skradin), Busse über Šibenik.",
+    tipp: "Ab Skradin mit dem Parkboot einfahren – schönste Anreise. Baden ist im Park nicht mehr erlaubt, dafür im Städtchen Skradin danach.",
+  },
+  {
+    name: "Kornaten: Bootstour durch 89 Inseln", region: "Norddalmatien",
+    lat: 43.8254, lng: 15.2733, kat: "insel", preis: 3, preisNote: "~60–80 € Tagestour inkl. Essen",
+    dauer: "Ganzer Tag", opnv: true,
+    desc: "Karge, mondartige Inselwelt – per Ausflugsboot ab Zadar mit Badestopps, Mittagessen an Bord und Einfahrt in den Nationalpark. „Am letzten Schöpfungstag krönte Gott sein Werk mit den Kornaten“ (G. B. Shaw).",
+    anreise: "Tagestouren starten am Hafen von Zadar – einfach am Vorabend an der Riva buchen oder online.",
+    tipp: "Tour wählen, die auch die Telašćica-Bucht mit Salzsee anfährt. Sonnencreme – auf den Inseln gibt es null Schatten.",
+  },
+  {
+    name: "Dugi Otok: Sakarun-Strand & Steilklippen", region: "Norddalmatien",
+    lat: 44.1350, lng: 14.8710, kat: "insel", preis: 1, preisNote: "Fähre ~5–8 €/Person",
+    dauer: "Ganzer Tag", opnv: true,
+    desc: "Karibisch türkise Bucht mit weißem Kies, dahinter der Naturpark Telašćica mit 160 m hohen Klippen. Eine der schönsten Inseln der Adria – und erstaunlich leer.",
+    anreise: "Fähre ab Zadar nach Brbinj oder Katamaran nach Sali (~1,5 Std). Roller/Auto mitnehmen lohnt sich, auf der Insel fahren wenige Busse.",
+    tipp: "Katamaran nach Sali + Taxiboot ist die Variante ohne Fahrzeug. In Sali abends Fisch essen.",
+  },
+  {
+    name: "Ugljan & Pašman: Inselhüpfen mit dem Rad", region: "Norddalmatien",
+    lat: 44.0855, lng: 15.1584, kat: "insel", preis: 1, preisNote: "Fähre ~4 €, Rad ~3 €",
+    dauer: "Halber bis ganzer Tag", opnv: true, radOk: true, rollerOk: true,
+    desc: "Zadars Vorgarten: 25 Minuten Fähre, dann Olivenhaine, kleine Häfen und ruhige Küstensträßchen – ideal zum Radeln. Über die Brücke geht es weiter nach Pašman.",
+    anreise: "Stündliche Fähre Zadar–Preko, Räder und Roller fahren mit.",
+    tipp: "Zur Festung St. Michael hochstrampeln (oder schieben) – Blick über die ganze Inselwelt bis Zadar.",
+  },
+  {
+    name: "Naturpark Vransko Jezero", region: "Norddalmatien",
+    lat: 43.8935, lng: 15.5730, kat: "natur", preis: 1, preisNote: "~3–5 €",
+    dauer: "Halber Tag", opnv: false, radOk: true,
+    desc: "Kroatiens größter See, ein Vogelparadies mit Radweg am Ufer. Der Aussichtspunkt Kamenjak zeigt See und Meer gleichzeitig – einer der besten Ausblicke Dalmatiens.",
+    anreise: "40 km ab Zadar über Biograd, am besten mit Auto/Roller; ambitionierte Radfahrer fahren die Runde um den See.",
+    tipp: "Zum Sonnenuntergang auf den Aussichtspunkt Kamenjak (nicht verwechseln mit dem Kap in Istrien).",
+  },
+  {
+    name: "Zrmanja-Canyon: Kajak oder Boot", region: "Norddalmatien",
+    lat: 44.2036, lng: 15.6786, kat: "aktiv", preis: 2, preisNote: "~45–60 € geführte Tour",
+    dauer: "Ganzer Tag", opnv: true,
+    desc: "Smaragdgrüner Fluss in einer Winnetou-Kulisse (hier wurde tatsächlich gedreht). Kajaktouren durch den Canyon, im Frühsommer mit kleinen Stromschnellen.",
+    anreise: "Touren ab Obrovac (~50 km von Zadar), viele Anbieter holen in Zadar ab.",
+    tipp: "Bei wenig Wasser im Hochsommer eher die Bootstour ab Obrovac nehmen – gleiche Aussicht, kein Treideln.",
+  },
+  {
+    name: "Insel Pag: Mondlandschaft, Käse & Zrće", region: "Norddalmatien",
+    lat: 44.4436, lng: 15.0561, kat: "insel", preis: 1, preisNote: "Brücke gratis, Käserei ~5–10 €",
+    dauer: "Ganzer Tag", opnv: true, rollerOk: true,
+    desc: "Karge Steinlandschaft wie vom Mond, dazu der berühmte Paški sir (Schafskäse), Salzfelder – und am Zrće-Strand Kroatiens größte Partymeile, falls dir danach ist.",
+    anreise: "Über die Pag-Brücke im Süden (~45 km ab Zadar), Busse Richtung Novalja.",
+    tipp: "Käserei Gligora in Kolan besuchen (Verkostung), danach Lun im Norden: 1000-jährige Olivenhaine.",
+  },
+
+  /* ---------- Šibenik & Umgebung ---------- */
+  {
+    name: "Šibenik: Kathedrale & Festung St. Michael", region: "Norddalmatien",
+    lat: 43.7350, lng: 15.8895, kat: "altstadt", preis: 1, preisNote: "Kathedrale ~10 €, Festung ~15 €",
+    dauer: "Halber Tag", opnv: true,
+    desc: "Oft übersprungen, völlig zu Unrecht: steile Steingassen, die UNESCO-Kathedrale des Hl. Jakob (komplett aus Stein, ohne Mörtel!) und Festungen mit Traumblick über die Bucht.",
+    anreise: "Zwischen Zadar (70 km) und Split (85 km), stündliche Busse aus beiden Städten.",
+    tipp: "Game-of-Thrones-Fans kennen die Kathedrale als Eisenbank von Braavos. Abends auf der Festung Barone ein Glas Wein.",
+  },
+  {
+    name: "Primošten: Postkartendorf auf der Halbinsel", region: "Norddalmatien",
+    lat: 43.5852, lng: 15.9236, kat: "altstadt", preis: 0, preisNote: "gratis",
+    dauer: "Halber Tag", opnv: true,
+    desc: "Ein Hügel voller Steinhäuser, komplett vom Meer umschlossen – das meistfotografierte Dorf Dalmatiens. Drumherum Kiesstrände und die berühmten Weinberge von Babić.",
+    anreise: "An der Küstenstraße zwischen Šibenik und Trogir, Busse halten an der Magistrale.",
+    tipp: "Abends zur Marienstatue auf dem Hügel Gaj – Sonnenuntergang über der Altstadt-Silhouette.",
+  },
+
+  /* ---------- Mitteldalmatien (rund um Split) ---------- */
+  {
+    name: "Split: Diokletianpalast & Altstadt", region: "Mitteldalmatien",
+    lat: 43.5081, lng: 16.4402, kat: "altstadt", preis: 1, preisNote: "Palast gratis, Keller ~8 €, Turm ~15 €",
+    dauer: "Halber Tag", opnv: true,
+    desc: "Eine lebendige Stadt IN einem römischen Kaiserpalast – die Bewohner wohnen seit 1700 Jahren zwischen den Palastmauern. Peristyl, Kellergewölbe, Glockenturm: Pflichtprogramm.",
+    anreise: "Direkt im Zentrum, 5 Minuten vom Hafen und Busbahnhof.",
+    tipp: "Vor 9 Uhr durch den Palast, dann gehört er fast dir. Dem Gregor von Nin am Goldenen Tor den Zeh reiben – bringt Glück.",
+  },
+  {
+    name: "Marjan-Hügel: Splits grüne Lunge", region: "Mitteldalmatien",
+    lat: 43.5090, lng: 16.4110, kat: "natur", preis: 0, preisNote: "gratis",
+    dauer: "2–3 Std", opnv: true,
+    desc: "Pinienwald-Halbinsel direkt neben der Altstadt: Aussichtsterrassen über Stadt und Inseln, Felsenkirchen, versteckte Badebuchten (Bene, Kašjuni).",
+    anreise: "Zu Fuß ab der Riva über die Treppen von Veli Varoš (~15 Min bis zur ersten Terrasse).",
+    tipp: "Zum Sonnenaufgang oder -untergang auf die erste Aussichtsterrasse (Café Vidilica) – Postkartenblick garantiert.",
+  },
+  {
+    name: "Festung Klis: Adlernest über Split", region: "Mitteldalmatien",
+    lat: 43.5589, lng: 16.5239, kat: "altstadt", preis: 1, preisNote: "~12 €",
+    dauer: "2–3 Std", opnv: true,
+    desc: "Uneinnehmbare Festung auf einem Felsgrat zwischen zwei Bergen – jahrhundertelang Bollwerk gegen die Osmanen, heute besser bekannt als Meereen aus Game of Thrones.",
+    anreise: "12 km ab Split, Stadtbus 22 oder 34 bis Klis, mit Auto/Roller 20 Min.",
+    tipp: "Danach im Ort Klis Lamm vom Spieß essen (die Restaurants dort sind dafür berühmt).",
+  },
+  {
+    name: "Trogir: UNESCO-Altstadt auf der Insel", region: "Mitteldalmatien",
+    lat: 43.5170, lng: 16.2514, kat: "altstadt", preis: 1, preisNote: "Altstadt gratis, Kathedrale ~7 €",
+    dauer: "Halber Tag", opnv: true, radOk: true,
+    desc: "Komplette mittelalterliche Stadt auf einer winzigen Insel zwischen Festland und Čiovo. Das Radovan-Portal der Kathedrale ist das schönste Steinmetzwerk Dalmatiens.",
+    anreise: "25 km ab Split: Bus 37, Ausflugsboot ab Hafen (im Sommer) oder über den Küstenradweg.",
+    tipp: "Abends bleiben, wenn die Tagesausflügler weg sind – dann leuchtet der Stein golden.",
+  },
+  {
+    name: "Omiš & Cetina-Schlucht: Zipline, Rafting", region: "Mitteldalmatien",
+    lat: 43.4446, lng: 16.6889, kat: "aktiv", preis: 2, preisNote: "Zipline ~65 €, Rafting ~45 €",
+    dauer: "Halber bis ganzer Tag", opnv: true,
+    desc: "Piratenstädtchen an der Mündung der Cetina, die sich hier durch eine dramatische Schlucht ins Meer gräbt. Zipline 150 m über dem Fluss, Rafting, Klettersteige – Adrenalin-Hauptstadt Dalmatiens.",
+    anreise: "25 km ab Split, alle Küstenbusse Richtung Makarska halten hier.",
+    tipp: "Wer es ruhiger mag: zur Festung Starigrad hochsteigen (Blick!) oder Bootstour flussaufwärts zum Restaurant Radmanove Mlinice.",
+  },
+  {
+    name: "Salona: Römische Ruinenstadt", region: "Mitteldalmatien",
+    lat: 43.5397, lng: 16.4828, kat: "altstadt", preis: 1, preisNote: "~8 €",
+    dauer: "2–3 Std", opnv: true, radOk: true,
+    desc: "Einst Hauptstadt der römischen Provinz Dalmatien mit 60.000 Einwohnern – heute Amphitheater, Thermen und Basiliken zwischen Olivenbäumen, fast ohne Touristen.",
+    anreise: "6 km ab Split (Solin), Stadtbus 1, auch gut mit dem Rad.",
+    tipp: "Morgens kommen und mit Klis kombinieren – beides liegt auf derselben Achse.",
+  },
+  {
+    name: "Brač: Zlatni Rat & Bol", region: "Mitteldalmatien",
+    lat: 43.2555, lng: 16.6539, kat: "strand", preis: 2, preisNote: "Katamaran ~15–20 €",
+    dauer: "Ganzer Tag", opnv: true,
+    desc: "Das Goldene Horn: eine Kieszunge, die je nach Strömung ihre Form ändert – Kroatiens berühmtester Strand. Dahinter das entspannte Städtchen Bol und Windsurf-Revier.",
+    anreise: "Katamaran Split–Bol direkt (~1 Std, früh buchen!) oder Fähre nach Supetar + Bus.",
+    tipp: "Nachmittags dreht der Maestral auf – Windsurf-Schnupperkurs oder einfach zusehen. Wer wandert: Vidova Gora (778 m), höchster Inselgipfel der Adria.",
+  },
+  {
+    name: "Hvar-Stadt & Pakleni-Inseln", region: "Mitteldalmatien",
+    lat: 43.1729, lng: 16.4411, kat: "insel", preis: 2, preisNote: "Katamaran ~15–25 €",
+    dauer: "Ganzer Tag", opnv: true,
+    desc: "Glamour-Insel mit venezianischem Hafen, Lavendelfeldern und der Festung Fortica über der Stadt. Vorgelagert die Pakleni-Inseln mit den schönsten Badebuchten – per Wassertaxi in 10 Minuten.",
+    anreise: "Katamaran ab Split (~1 Std), im Sommer mehrmals täglich – Rückfahrt vorab buchen.",
+    tipp: "Um 8 Uhr Katamaran, morgens Festung (kühl + leer), mittags Wassertaxi nach Palmižana, 18 Uhr zurück.",
+  },
+  {
+    name: "Blaue Grotte & Vis: Bootstour", region: "Mitteldalmatien",
+    lat: 43.0057, lng: 16.0261, kat: "insel", preis: 3, preisNote: "~100–130 € Tagestour",
+    dauer: "Ganzer Tag", opnv: true,
+    desc: "Speedboot-Tour zur leuchtend blauen Höhle von Biševo, dazu Stiniva-Bucht, grüne Grotte und das entschleunigte Vis (Drehort von Mamma Mia 2). Teuer, aber ein Once-in-a-lifetime-Tag.",
+    anreise: "Touren starten früh ab Splits Riva; ruhige See = Grotte offen, bei Wellen fällt sie aus.",
+    tipp: "Nur bei ruhigem Wetter buchen und die erste Tour des Tages nehmen – mittags staut es sich vor der Grotte.",
+  },
+  {
+    name: "Makarska Riviera & Biokovo Skywalk", region: "Mitteldalmatien",
+    lat: 43.3216, lng: 17.0553, kat: "natur", preis: 1, preisNote: "Naturpark ~10 €, Skywalk inkl.",
+    dauer: "Ganzer Tag", opnv: true,
+    desc: "Kilometerlange Kiesstrände unter der 1700-m-Wand des Biokovo. Oben: Glasplattform „Skywalk“ mit freiem Blick 1200 m senkrecht hinunter aufs Meer – bei klarer Sicht bis Italien.",
+    anreise: "60 km ab Split, alle Busse Richtung Dubrovnik halten in Makarska. Auf den Berg: eigenes Auto (enge Bergstraße) oder Shuttle-Touren ab Makarska.",
+    tipp: "Skywalk zum Sonnenuntergang; unten danach in Brela den Strand Punta Rata – gilt als schönster der Riviera.",
+  },
+
+  /* ---------- Süddalmatien (rund um Dubrovnik) ---------- */
+  {
+    name: "Dubrovnik: Stadtmauern-Rundgang", region: "Süddalmatien",
+    lat: 42.6410, lng: 18.1084, kat: "altstadt", preis: 2, preisNote: "~35 €",
+    dauer: "Halber Tag", opnv: true,
+    desc: "2 km komplett begehbare Stadtmauer über der „Perle der Adria“ – jeder Schritt ein Postkartenmotiv. Danach Stradun, Rektorenpalast und die Gassen der Altstadt.",
+    anreise: "Altstadt ist autofrei; Busse halten am Pile-Tor.",
+    tipp: "Punkt 8 Uhr auf die Mauer (Ticket online) oder 2 Std vor Schließung – mittags ist es brutal heiß und voll. Kreuzfahrt-Kalender checken und volle Tage meiden.",
+  },
+  {
+    name: "Seilbahn auf den Srđ", region: "Süddalmatien",
+    lat: 42.6446, lng: 18.1116, kat: "natur", preis: 2, preisNote: "~27 € hin & zurück",
+    dauer: "2 Std", opnv: true,
+    desc: "In 4 Minuten auf 412 m: DER Blick auf Altstadt, Lokrum und die Elafiti-Inseln. Oben Museum zum Unabhängigkeitskrieg in der alten Festung.",
+    anreise: "Talstation 5 Gehminuten oberhalb der Altstadt.",
+    tipp: "Sparvariante: hochfahren, den Serpentinenweg hinunterwandern (~45 Min). Sonnenuntergang oben ist Kitsch pur – im besten Sinne.",
+  },
+  {
+    name: "Lokrum: Dubrovniks Badeinsel", region: "Süddalmatien",
+    lat: 42.6252, lng: 18.1198, kat: "insel", preis: 2, preisNote: "~27 € Boot inkl. Eintritt",
+    dauer: "Halber Tag", opnv: true,
+    desc: "10 Minuten Boot ab Altstadthafen: botanischer Garten, freche Pfauen, Kloster, Felsplateaus zum Baden und ein kleiner Salzsee („Totes Meer“).",
+    anreise: "Boote ab Altstadthafen alle 30 Min, letztes Boot zurück beachten!",
+    tipp: "Perfekte Mittagsflucht, wenn die Altstadt überkocht. Badeschuhe für die Felsen mitnehmen.",
+  },
+  {
+    name: "Elafiti-Inseln: Drei-Insel-Tour", region: "Süddalmatien",
+    lat: 42.7511, lng: 17.9536, kat: "insel", preis: 2, preisNote: "~40–60 € inkl. Mittagessen",
+    dauer: "Ganzer Tag", opnv: true,
+    desc: "Koločep, Lopud, Šipan – autofreie Mini-Inseln mit Sandstrand (Šunj auf Lopud!), Gärten und Fischerdörfern. Als entspannte Bootstour mit Badestopps.",
+    anreise: "Ausflugsboote ab Gruž-Hafen; günstiger: Linienfähre nach Lopud auf eigene Faust.",
+    tipp: "Auf eigene Faust: Fähre nach Lopud, über den Hügel zum Sandstrand Šunj wandern (20 Min).",
+  },
+  {
+    name: "Cavtat: Riviera-Städtchen", region: "Süddalmatien",
+    lat: 42.5806, lng: 18.2183, kat: "altstadt", preis: 1, preisNote: "Boot ~10–15 €",
+    dauer: "Halber Tag", opnv: true,
+    desc: "Elegante Uferpromenade in einer geschützten Doppelbucht, Zypressen-Halbinsel zum Spazieren, deutlich ruhiger als Dubrovnik.",
+    anreise: "Wassertaxi ab Dubrovnik-Altstadthafen (~45 Min, schönste Anreise) oder Bus 10.",
+    tipp: "Rundweg um die Halbinsel Rat gehen (~30 Min) und in einer der Badebuchten hängenbleiben.",
+  },
+  {
+    name: "Nationalpark Mljet: Salzseen im Wald", region: "Süddalmatien",
+    lat: 42.7783, lng: 17.3554, kat: "natur", preis: 2, preisNote: "Katamaran ~15 €, Park ~25 €",
+    dauer: "Ganzer Tag", opnv: true,
+    desc: "Die grünste Insel der Adria: zwei Salzwasserseen mitten im Pinienwald, in einem davon ein Inselchen mit Kloster. Baden, Radeln, Kajak – Ruhe pur.",
+    anreise: "Katamaran ab Dubrovnik nach Polače/Pomena (~1,5 Std), im Park Räder leihen.",
+    tipp: "Rad leihen und die Seen umrunden, Badestopp an der Brücke Mali Most. Letzten Katamaran nicht verpassen – der nächste geht erst morgen.",
+  },
+  {
+    name: "Ston: Mauern & Austern", region: "Süddalmatien",
+    lat: 42.8367, lng: 17.6961, kat: "altstadt", preis: 1, preisNote: "Mauer ~10 €, 6 Austern ~10–15 €",
+    dauer: "Halber Tag", opnv: true,
+    desc: "Die „chinesische Mauer Europas“: 5,5 km Verteidigungsmauer über den Hügel, darunter Salzgärten aus der Römerzeit und die berühmtesten Austernbänke der Adria (Mali Ston).",
+    anreise: "55 km ab Dubrovnik, Busse Richtung Korčula/Orebić halten in Ston.",
+    tipp: "Erst Mauer (morgens, im Sommer schweißtreibend), dann Austern direkt vom Boot in Mali Ston.",
+  },
+  {
+    name: "Korčula: Marco Polos Inselstadt", region: "Süddalmatien",
+    lat: 42.9600, lng: 17.1361, kat: "insel", preis: 2, preisNote: "Katamaran ~20 €",
+    dauer: "Ganzer Tag", opnv: true,
+    desc: "Mini-Dubrovnik ohne die Massen: fischgrätenförmige Altstadt-Gassen auf einer Halbinsel, angeblich Geburtsort Marco Polos, drumherum Weinberge (Pošip!) und Badebuchten.",
+    anreise: "Katamaran ab Dubrovnik (~2 Std) oder ab Split über Hvar.",
+    tipp: "Abends Cocktail in der Massimo-Bar – in einem Wehrturm, Getränke kommen per Flaschenzug.",
+  },
+  {
+    name: "Kajak-Tour um die Stadtmauern", region: "Süddalmatien",
+    lat: 42.6400, lng: 18.1030, kat: "aktiv", preis: 2, preisNote: "~35–45 €",
+    dauer: "3 Std", opnv: true,
+    desc: "Dubrovnik von der schönsten Seite: im Seekajak unter den Mauern entlang, um Lokrum herum, mit Badestopp in der Betina-Höhle.",
+    anreise: "Start direkt unterhalb des Pile-Tors.",
+    tipp: "Sunset-Tour nehmen – Mauern im Abendlicht, danach glüht die Stadt.",
+  },
+
+  /* ---------- Istrien ---------- */
+  {
+    name: "Pula: Römisches Amphitheater", region: "Istrien",
+    lat: 44.8732, lng: 13.8500, kat: "altstadt", preis: 1, preisNote: "~12 €",
+    dauer: "Halber Tag", opnv: true,
+    desc: "Eines der sechs größten erhaltenen Amphitheater der Welt – und das vollständigste: der äußere Ring steht komplett. Dazu Sergierbogen, Augustustempel und Hafenflair.",
+    anreise: "Mitten in Pula, 10 Gehminuten vom Busbahnhof.",
+    tipp: "Abends wiederkommen: Bei „Lighting Giants“ leuchten die Hafenkräne bunt – und im Sommer laufen Konzerte und ein Filmfestival in der Arena.",
+  },
+  {
+    name: "Kap Kamenjak: wildes Süd-Istrien", region: "Istrien",
+    lat: 44.7702, lng: 13.9095, kat: "strand", preis: 1, preisNote: "Auto ~10 €, Rad/zu Fuß gratis",
+    dauer: "Ganzer Tag", opnv: false, radOk: true, rollerOk: true,
+    desc: "Naturpark an der Südspitze Istriens: Klippen zum Springen, türkise Buchten, Schotterwege durch Macchia – mit dem Rad ein Traum. Safari-Bar im Bambusdickicht als Kult-Stopp.",
+    anreise: "10 km ab Pula über Premantura; mit dem Rad die schönste Variante, Auto zahlt Eintritt.",
+    tipp: "Bucht Portić ansteuern, die Klippenspringer treffen sich bei der Safari-Bar. Achtung: kaum Schatten, viel Wasser mitnehmen.",
+  },
+  {
+    name: "Rovinj: Altstadt-Labyrinth", region: "Istrien",
+    lat: 45.0812, lng: 13.6387, kat: "altstadt", preis: 0, preisNote: "gratis, Kirchturm ~5 €",
+    dauer: "Halber Tag", opnv: true,
+    desc: "Bunte Häuser direkt am Wasser, Kopfsteingassen, die alle zur Kirche St. Euphemia hinaufführen – Istriens schönste Stadt und ein einziges Fotomotiv.",
+    anreise: "Busse aus allen istrischen Städten; Parken außerhalb, Altstadt zu Fuß.",
+    tipp: "Auf den Kirchturm steigen (Holztreppe, Nervenkitzel inklusive), abends Aperitif in der Felsenbar Valentino.",
+  },
+  {
+    name: "Nationalpark Brijuni: Tito-Inseln", region: "Istrien",
+    lat: 44.9147, lng: 13.7669, kat: "insel", preis: 2, preisNote: "~35–40 € inkl. Boot & Bahn",
+    dauer: "Halber bis ganzer Tag", opnv: true,
+    desc: "Titos ehemalige Sommerresidenz: Safari-Park mit Zebras (Staatsgeschenke), römische Villa, Dinosaurier-Spuren und golfplatzartige Parklandschaft – skurril und schön.",
+    anreise: "Offizielles Parkboot ab Fažana (8 km ab Pula), Plätze vorab reservieren.",
+    tipp: "Nur die offizielle NP-Tour fährt auf die Hauptinsel – private „Brijuni-Touren“ fahren oft nur drumherum.",
+  },
+  {
+    name: "Motovun & Hügeldörfer des Hinterlands", region: "Istrien",
+    lat: 45.3366, lng: 13.8287, kat: "altstadt", preis: 1, preisNote: "Ort gratis, Parken/Shuttle ~5 €",
+    dauer: "Ganzer Tag", opnv: false,
+    desc: "Mittelalterliches Bergdorf über dem Mirna-Tal, umgeben von Trüffelwäldern und Weinbergen – die Toskana Kroatiens. In der Nähe: Grožnjan (Künstlerdorf) und Hum, die „kleinste Stadt der Welt“.",
+    anreise: "Ohne Auto/Roller kaum machbar – dafür eine der schönsten Panoramastraßen-Runden Istriens.",
+    tipp: "Trüffel-Pasta mit Blick vom Mauerring; im Herbst ist Trüffelsaison, dann riecht das ganze Dorf danach.",
+  },
+  {
+    name: "Lim-Fjord: Bootstour & Austern", region: "Istrien",
+    lat: 45.1289, lng: 13.7361, kat: "natur", preis: 2, preisNote: "Bootstour ~20–30 €",
+    dauer: "Halber Tag", opnv: true,
+    desc: "11 km tiefer, grüner Meeresarm zwischen bewaldeten Steilhängen – Muschel- und Austernzucht, Panorama-Aussichtspunkte an der Straße.",
+    anreise: "Bootstouren ab Rovinj oder Vrsar; Aussichtspunkte an der Straße Rovinj–Poreč.",
+    tipp: "Austern direkt an der Muschelfarm im Fjord probieren – frischer geht es nicht.",
+  },
+  {
+    name: "Poreč: Euphrasius-Basilika", region: "Istrien",
+    lat: 45.2258, lng: 13.5936, kat: "altstadt", preis: 1, preisNote: "~10 €",
+    dauer: "2–3 Std", opnv: true,
+    desc: "Byzantinische Goldmosaiken aus dem 6. Jahrhundert, UNESCO-Welterbe – dazu römischer Straßenraster in der Altstadt und lebhafte Hafenpromenade.",
+    anreise: "Busknoten Istriens, aus allen Küstenorten erreichbar.",
+    tipp: "Glockenturm der Basilika hochsteigen für den Blick über die roten Dächer.",
+  },
+  {
+    name: "Parenzana: Radweg durch Istrien", region: "Istrien",
+    lat: 45.2951, lng: 13.7205, kat: "aktiv", preis: 0, preisNote: "gratis (Radverleih ~20 €/Tag)",
+    dauer: "Ganzer Tag", opnv: false, radOk: true,
+    desc: "Alte Schmalspurbahn-Trasse, heute 80 km Radweg durch Weinberge, Tunnel und Viadukte – von Triest über Grožnjan und Motovun nach Poreč. Sanfte Steigungen, große Panoramen.",
+    anreise: "Einstieg z. B. in Vižinada oder Motovun; E-Bike-Verleih in allen größeren Orten.",
+    tipp: "Etappe Grožnjan–Motovun ist das Filetstück: zwei Tunnel (Licht mitnehmen!) und das Mirna-Tal zu Füßen.",
+  },
+
+  /* ---------- Kvarner Bucht ---------- */
+  {
+    name: "Opatija: Lungomare-Küstenweg", region: "Kvarner Bucht",
+    lat: 45.3371, lng: 14.3053, kat: "altstadt", preis: 0, preisNote: "gratis",
+    dauer: "Halber Tag", opnv: true, radOk: true,
+    desc: "K.-u.-k.-Seebad mit Belle-Époque-Villen und einem 12 km langen Uferweg direkt am Wasser – von Volosko bis Lovran, vorbei am „Mädchen mit der Möwe“.",
+    anreise: "15 km ab Rijeka, Stadtbus 32.",
+    tipp: "Abschnitt Opatija–Volosko zum Sonnenuntergang gehen, in Volosko in einer Konoba frischen Fisch essen.",
+  },
+  {
+    name: "Insel Krk: Baška & Goldstrand", region: "Kvarner Bucht",
+    lat: 44.9694, lng: 14.7460, kat: "insel", preis: 1, preisNote: "Brücke ~5 € (Auto)",
+    dauer: "Ganzer Tag", opnv: true,
+    desc: "Über eine Brücke erreichbare große Insel: Weinort Vrbnik auf der Klippe, Städtchen Krk und der 2 km lange Naturkiesstrand von Baška vor Bergkulisse.",
+    anreise: "Ab Rijeka über die Krk-Brücke (~40 km bis Krk-Stadt), Busse mehrmals täglich.",
+    tipp: "In Vrbnik den Weißwein Žlahtina im Weinkeller über der Steilküste probieren.",
+  },
+  {
+    name: "Rijeka: Trsat-Burg & Hafenkultur", region: "Kvarner Bucht",
+    lat: 45.3271, lng: 14.4522, kat: "altstadt", preis: 1, preisNote: "Burg ~2 €",
+    dauer: "Halber Tag", opnv: true,
+    desc: "Raue Hafenstadt mit Korzo-Flaniermeile, Street-Art und der Burg Trsat über der Rječina-Schlucht – Kulturhauptstadt-Flair statt Postkarten-Idylle.",
+    anreise: "Zug- und Busknoten; auf die Burg führen 561 Stufen (oder Bus 8).",
+    tipp: "Vormittags über den Markt an der Riva, dann die Petar-Kružić-Treppe nach Trsat hinauf.",
+  },
+
+  /* ---------- Zagreb & Binnenland ---------- */
+  {
+    name: "Zagreb: Oberstadt & Dolac-Markt", region: "Zagreb & Binnenland",
+    lat: 45.8150, lng: 15.9785, kat: "altstadt", preis: 0, preisNote: "gratis, Standseilbahn ~1 €",
+    dauer: "Halber Tag", opnv: true,
+    desc: "Mitteleuropäisches Flair statt Adria: der rote Schirmwald des Dolac-Markts, die kürzeste Standseilbahn der Welt, St. Markus mit dem Wappendach und jede Menge Kaffeehauskultur.",
+    anreise: "Zentrum ab Hauptbahnhof zu Fuß in 15 Min.",
+    tipp: "Punkt 12 Uhr am Lotrščak-Turm: Seit 1877 feuert dort täglich die Mittagskanone – und ganz Zagreb stellt die Uhr danach.",
+  },
+  {
+    name: "Museum der zerbrochenen Beziehungen", region: "Zagreb & Binnenland",
+    lat: 45.8153, lng: 15.9736, kat: "altstadt", preis: 1, preisNote: "~7 €",
+    dauer: "1–2 Std", opnv: true,
+    desc: "Weltweit einzigartig: Alltagsgegenstände gescheiterter Beziehungen samt ihrer Geschichten – mal herzzerreißend, mal zum Brüllen komisch. Zagrebs berühmtestes Museum.",
+    anreise: "In der Oberstadt, neben St. Markus.",
+    tipp: "Perfekt für den heißen Nachmittag oder einen Regentag – und der Museumsshop ist ausnahmsweise wirklich gut.",
+  },
+  {
+    name: "Medvednica & Burg Medvedgrad", region: "Zagreb & Binnenland",
+    lat: 45.8993, lng: 15.9469, kat: "natur", preis: 0, preisNote: "gratis, Seilbahn ~10 €",
+    dauer: "Halber Tag", opnv: true,
+    desc: "Zagrebs Hausberg: Buchenwälder, die wiederaufgebaute Burg Medvedgrad mit Stadtblick und oben am Sljeme (1035 m) Bergluft statt Sommerhitze.",
+    anreise: "Seilbahn ab Stadtrand (Tram 14 bis Mihaljevac, dann 15) oder zahlreiche Wanderwege.",
+    tipp: "In einem der Berggasthäuser Štrukli essen – das Zagreber Nationalgericht schmeckt auf 1000 m am besten.",
+  },
+  {
+    name: "Rastoke: Wassermühlen-Dorf", region: "Zagreb & Binnenland",
+    lat: 45.1147, lng: 15.5828, kat: "natur", preis: 1, preisNote: "Zutritt teils ~2–5 €",
+    dauer: "2 Std", opnv: true,
+    desc: "Miniatur-Plitvice: historische Wassermühlen auf Travertininseln, zwischen denen die Slunjčica in die Korana stürzt. Idealer Zwischenstopp auf dem Weg zu den Plitvicer Seen.",
+    anreise: "An der Hauptstraße Zagreb–Plitvice (Slunj); Busse Richtung Plitvice halten in Slunj.",
+    tipp: "Früh oder spät kommen, mittags halten hier alle Reisebusse. Forelle in einer der Mühlen essen.",
+  },
+];
+
+/* ---------- Stadt-Rundgänge ---------- */
+const ROUTEN = [
+  {
+    stadt: "Zadar", dauer: "Halber Tag – am besten ab späten Nachmittag",
+    start: "Landtor am Foša-Hafen (von dort führt alles Weitere logisch nach Nordwesten)",
+    schritte: [
+      { ort: "Landtor & Foša-Hafen", notiz: "Prunkvollster Stadteingang Dalmatiens, venezianischer Löwe inklusive." },
+      { ort: "Kalelarga (Široka ulica)", notiz: "Die Hauptader der Altstadt – älter als die Stadt selbst, sagen die Zadrani." },
+      { ort: "Volksplatz (Narodni trg)", notiz: "Kaffee trinken, Leute schauen – hier schlägt Zadars Herz." },
+      { ort: "Forum Romanum & Kirche St. Donatus", notiz: "2000 Jahre auf einem Platz. Die Rundkirche ist DAS Wahrzeichen." },
+      { ort: "Glockenturm der Kathedrale", notiz: "~3 €, bester Rundblick über Halbinsel, Inseln und Velebit." },
+      { ort: "Meeresorgel", notiz: "Auf den Stufen sitzen und dem Meer beim Orgeln zuhören." },
+      { ort: "Gruß an die Sonne – zum Sonnenuntergang", notiz: "Finale: 300 Glasplatten laden tagsüber Sonne und leuchten nachts." },
+    ],
+    danach: "Abendessen in der Varoš-Gasse (Stomorica), danach Cocktail in der Garten-Lounge „Ledana“.",
+  },
+  {
+    stadt: "Split", dauer: "Ganzer Tag – Start vor 9 Uhr",
+    start: "Goldenes Tor (Nordseite des Palastes) – so betrittst du den Palast wie die Kaiser",
+    schritte: [
+      { ort: "Gregor von Nin", notiz: "Erst den glänzenden Zeh der Statue reiben – bringt Glück, sagt ganz Split." },
+      { ort: "Peristyl", notiz: "Das römische Herzstück, morgens fast leer. Kaffee auf den Stufen des Luxor." },
+      { ort: "Kathedrale & Glockenturm", notiz: "Aufstieg ~15 € – der Blick über Palastdächer und Hafen lohnt jede Stufe." },
+      { ort: "Kellergewölbe des Palastes", notiz: "~8 €. Kühl, beeindruckend, Game-of-Thrones-Drehort (Drachenkeller)." },
+      { ort: "Vestibül & Gassen", notiz: "Im runden Vestibül singen oft Klapa-Gruppen – Gänsehaut in Stein." },
+      { ort: "Grüner Markt & Fischmarkt", notiz: "Vor Mittag: Feigen, Pršut, das echte Split abseits der Souvenirs." },
+      { ort: "Riva – Mittagspause", notiz: "Palmenpromenade, Pause im Schatten, Menschen gucken." },
+      { ort: "Marjan-Aussichtsterrasse", notiz: "Nachmittags über die Treppen von Veli Varoš hinauf – Sonnenuntergang mit Stadtblick." },
+    ],
+    danach: "Abends Bačvice-Bucht: den Einheimischen beim Kultspiel „Picigin“ im knietiefen Wasser zusehen.",
+  },
+  {
+    stadt: "Dubrovnik", dauer: "Ganzer Tag – Start um 8 Uhr, mittags Pause einplanen",
+    start: "Pile-Tor – davor Wasser auffüllen am Onofrio-Brunnen",
+    schritte: [
+      { ort: "Stadtmauern (2 km Rundgang)", notiz: "Punkt 8 Uhr mit Online-Ticket – morgens gehört die Mauer dir, mittags brennt sie." },
+      { ort: "Stradun", notiz: "Die spiegelglatt polierte Prachtstraße – einmal auf und ab, in die Seitengassen abbiegen." },
+      { ort: "Rektorenpalast & Kathedrale", notiz: "Gotik trifft Barock; im Palast das alte Dubrovnik der Republik Ragusa." },
+      { ort: "Mittagsflucht nach Lokrum", notiz: "Boot ab Altstadthafen: baden, Pfauen, Schatten – bis die größte Hitze vorbei ist." },
+      { ort: "Buža-Bar", notiz: "Durch ein Loch in der Stadtmauer auf die Felsen – Getränk mit Meerblick, Mutige springen." },
+      { ort: "Seilbahn oder Wanderweg auf den Srđ", notiz: "Finale zum Sonnenuntergang: die ganze Stadt liegt dir zu Füßen." },
+    ],
+    danach: "Kreuzfahrtschiff-Kalender checken (portdubrovnik.hr) und Tage mit 2+ Schiffen für Ausflüge nutzen statt für die Altstadt.",
+  },
+  {
+    stadt: "Šibenik", dauer: "Halber Tag",
+    start: "Riva an der Krka-Mündung, dann durch die Gassen bergauf",
+    schritte: [
+      { ort: "Kathedrale des Hl. Jakob", notiz: "UNESCO: komplett aus Stein gefügt, außen 71 Bürgerköpfe aus dem 15. Jh." },
+      { ort: "Altstadt-Gassen & Kloster-Garten", notiz: "Mittelaltergassen ohne Souvenir-Overkill, der Klostergarten St. Lawrence als Ruhepol." },
+      { ort: "Festung St. Michael", notiz: "Über Treppengassen hinauf – Bucht-Panorama von der Festungsmauer." },
+      { ort: "Festung Barone", notiz: "Kombiticket nutzen; abends Weinbar mit Blick über die Dächer." },
+    ],
+    danach: "Kombiniert sich perfekt mit dem NP Krka (Boot ab Skradin) am selben oder nächsten Tag.",
+  },
+  {
+    stadt: "Trogir", dauer: "2–3 Stunden",
+    start: "Landtor an der Nordseite – von dort direkt ins Gassennetz",
+    schritte: [
+      { ort: "Kathedrale St. Laurentius", notiz: "Das Radovan-Portal ist das Meisterwerk; Turmaufstieg für den Inselblick." },
+      { ort: "Loggia & Uhrturm", notiz: "Der alte Gerichtsplatz – seit 700 Jahren Bühne der Stadt." },
+      { ort: "Gassenlabyrinth", notiz: "Einfach verlaufen – die Insel ist so klein, du kommst immer am Meer raus." },
+      { ort: "Festung Kamerlengo", notiz: "Venezianische Burg an der Westspitze, oben Rundblick über Riva und Čiovo." },
+      { ort: "Riva-Promenade", notiz: "Palmen, Jachten, Eis – zum Abschluss einmal komplett abgehen." },
+    ],
+    danach: "Über die Brücke nach Čiovo zum Baden, oder Ausflugsboot zur Blauen Lagune.",
+  },
+  {
+    stadt: "Hvar-Stadt", dauer: "Ganzer Tag (als Ausflug ab Split machbar)",
+    start: "Hafenpromenade – Ankunft der Katamarane",
+    schritte: [
+      { ort: "Pjaca (St.-Stephans-Platz)", notiz: "Größter Platz Dalmatiens, Kathedrale als Kulisse." },
+      { ort: "Festung Fortica (Španjola)", notiz: "30 Min Aufstieg durch Agaven – der Blick auf Stadt + Pakleni-Inseln ist das Inselfoto schlechthin. Morgens gehen!" },
+      { ort: "Benediktinerinnen-Kloster", notiz: "Die Nonnen klöppeln Spitze aus Agavenfasern – UNESCO-Kulturerbe." },
+      { ort: "Wassertaxi zu den Pakleni-Inseln", notiz: "Mittags rüber nach Palmižana: baden, Lunch zwischen Kakteen." },
+      { ort: "Riva zum Sonnenuntergang", notiz: "Zurück mit dem Taxiboot, Aperitif mit Blick auf die einlaufenden Jachten." },
+    ],
+    danach: "Wer bleibt: Lavendelfelder bei Velo Grablje und das verlassene Dorf Malo Grablje (Konoba Stori Komin!).",
+  },
+  {
+    stadt: "Pula", dauer: "Halber Tag, abends nochmal kurz",
+    start: "Amphitheater – morgens vor den Reisegruppen",
+    schritte: [
+      { ort: "Arena (Amphitheater)", notiz: "Früh rein, dann hast du die Ränge fast allein. Unterirdisch: Ausstellung zu Öl & Wein der Antike." },
+      { ort: "Sergierbogen & Via Sergia", notiz: "Durch den goldenen Triumphbogen in die Fußgängerzone." },
+      { ort: "Forum & Augustustempel", notiz: "Römischer Marktplatz, bis heute Pulas Wohnzimmer." },
+      { ort: "Kastell-Hügel", notiz: "Venezianische Sternfestung mit Rundblick über Hafen und Werften." },
+      { ort: "Abends: Lighting Giants", notiz: "Die Hafenkräne leuchten in Farben – dazu Riva-Spaziergang." },
+    ],
+    danach: "Nachmittags raus ans Kap Kamenjak (10 km) – Stadt und Klippenbaden an einem Tag.",
+  },
+  {
+    stadt: "Rovinj", dauer: "Halber Tag – goldene Stunde einplanen",
+    start: "Marktplatz am Hafen (Trg Valdibora), dann in die Altstadt-Gassen",
+    schritte: [
+      { ort: "Grisia-Gasse", notiz: "Die Künstler- und Galeriengasse zieht sich den Hügel hinauf – Kopfsteinpflaster, Wäscheleinen, Ateliers." },
+      { ort: "Kirche St. Euphemia", notiz: "Auf den Kirchturm über die alte Holztreppe (~5 €) – Istrien-Panorama pur." },
+      { ort: "Gassen zum Wasser", notiz: "Westseite: Häuser stehen direkt in der Adria, jede Öffnung ein Postkartenblick." },
+      { ort: "Balbi-Bogen & Hafenrunde", notiz: "Zurück am Hafen den Batana-Booten zusehen – Rovinjs hölzernes Kulturerbe." },
+      { ort: "Sonnenuntergang in der Felsenbar", notiz: "Valentino oder Mediterraneo: Kissen auf Felsen, Spritz in der Hand, Sonne im Meer." },
+    ],
+    danach: "Im Sommer abends Open-Air-Kino oder Konzerte; tagsüber Bootstour Lim-Fjord ab Hafen.",
+  },
+  {
+    stadt: "Zagreb", dauer: "Ganzer Tag",
+    start: "Ban-Jelačić-Platz – der Nullpunkt der Stadt",
+    schritte: [
+      { ort: "Dolac-Markt", notiz: "Vormittags unter den roten Schirmen: Obst, Käse, Blumen – Zagrebs Bauch." },
+      { ort: "Kathedrale & Kaptol", notiz: "Neugotische Türme, davor das Bischofsviertel." },
+      { ort: "Tkalčićeva", notiz: "Die Café-Straße – ein Kaffee hier ist Pflichtprogramm, Zagreb lebt Kaffeehauskultur." },
+      { ort: "Standseilbahn zur Oberstadt", notiz: "66 Sekunden, kürzeste der Welt – oben am Lotrščak-Turm um 12 Uhr die Kanone erleben." },
+      { ort: "St. Markus & Oberstadt", notiz: "Das Wappendach-Wahrzeichen, drumherum Regierungsviertel in Pastell." },
+      { ort: "Museum der zerbrochenen Beziehungen", notiz: "90 Minuten zwischen Lachen und Kloß im Hals." },
+      { ort: "Strossmayer-Promenade", notiz: "Unter Kastanien zurückschlendern – abends mit Straßenmusik und Stadtlichtern." },
+    ],
+    danach: "Bei Hitze: Seilbahn auf die Medvednica oder Badesee Jarun. Abends Craft-Beer in der Opatovina.",
+  },
+];
+
+/* ---------- Praktische Tipps ---------- */
+const PRAKTISCH = [
+  {
+    titel: "Ohne Auto unterwegs",
+    punkte: [
+      "Fernbusse sind das Rückgrat Kroatiens: Arriva, FlixBus & Co. verbinden alle Küstenstädte im Stundentakt – Tickets über die Apps von GetByBus oder FlixBus.",
+      "Katamarane (Krilo/TP Line, Jadrolinija) verbinden Split, Hvar, Brač, Korčula, Dubrovnik – in der Hochsaison 1–2 Tage vorher online buchen, sie sind schnell voll.",
+      "Autofähren (Jadrolinija) kann man meist nicht reservieren: first come, first serve – bei Inselrückfahrt am Sonntag früh da sein.",
+      "In Städten: Uber/Bolt funktionieren gut und sind günstiger als Taxis vom Stand.",
+    ],
+  },
+  {
+    titel: "Mit Auto",
+    punkte: [
+      "Die Autobahn A1 ist mautpflichtig (Mautstation, Karte/Bar) – Zadar–Split ~10 €. Die Küstenstraße (Magistrale) ist gratis und schöner, aber im Juli/August zäh.",
+      "Altstädte sind autofrei – am Rand parken (blaue Zonen, per App EasyPark zahlbar) und laufen. In Dubrovnik und Split sind Parkhäuser die nervenschonendste Option.",
+      "Tanken ist etwas günstiger als in Deutschland; an Feiertagen und Sonntagen haben Tankstellen normal geöffnet.",
+    ],
+  },
+  {
+    titel: "Mit Roller & Fahrrad",
+    punkte: [
+      "Roller (50–125 ccm) gibt es in jedem Küstenort ab ~25–35 €/Tag – ideal für Strände und Dörfer im Umkreis bis ~40 km. Helmpflicht gilt immer.",
+      "Fähren nehmen Zweiräder günstig mit (~3–5 €) – Inseln wie Ugljan, Dugi Otok oder Mljet sind perfekte Roller-/Radreviere.",
+      "Die Magistrale hat wenig Seitenstreifen und viel Verkehr – für Radtouren besser Inseln, Radwege (Parenzana!) oder das Hinterland wählen.",
+      "Im Hochsommer Touren auf früh morgens legen; ab 11 Uhr wird jeder Anstieg zur Sauna.",
+    ],
+  },
+  {
+    titel: "Budget & Bezahlen",
+    punkte: [
+      "Kroatien hat den Euro (seit 2023) – kein Geldwechsel nötig, Karte wird fast überall akzeptiert.",
+      "Grobe Richtwerte Hochsaison: Kaffee 2–3 €, Bier 3–5 €, Pizza/Pasta 10–15 €, Fischgericht 15–25 €, Eiskugel 2 €.",
+      "Nationalparks sind der größte Einzelposten (Plitvice/Krka ~40 € im Sommer) – außerhalb Juni–September kosten sie oft nur die Hälfte.",
+      "Konoba (Taverne) im Hinterland ist meist besser UND günstiger als das Restaurant an der ersten Meereslinie.",
+    ],
+  },
+  {
+    titel: "Hitze, Baden & Timing",
+    punkte: [
+      "Der Sommer-Rhythmus, der funktioniert: Ausflüge und Städte 8–11 Uhr, Strand/Siesta 12–16 Uhr, zweite Runde ab 17 Uhr, essen ab 20 Uhr.",
+      "Strände sind fast überall Kies oder Fels – Badeschuhe sind die beste 10-€-Investition des Urlaubs (Seeigel!).",
+      "Leitungswasser ist überall trinkbar – Flasche auffüllen statt kaufen.",
+      "Sonnenuntergang ist in Kroatien Programmpunkt, nicht Nebensache: Zadar (Meeresorgel), Rovinj (Felsenbars), Dubrovnik (Srđ) – Platz jeweils 30–45 Min vorher sichern.",
+    ],
+  },
+  {
+    titel: "Buchen & Apps",
+    punkte: [
+      "Plitvice: Zeitfenster-Ticket vorab online Pflicht (np-plitvicka-jezera.hr). Krka & Kornati: online spart Warteschlange.",
+      "Bootstouren am Vorabend an der Riva buchen ist okay – bei Blaue-Grotte-Touren aber aufs Wetter achten (Seegang = Ausfall).",
+      "Nützlich: GetByBus (Busse), Jadrolinija & Krilo (Fähren), EasyPark (Parken), Windy (Wind für Bootstage).",
+      "Dubrovnik: Kreuzfahrtkalender im Blick behalten und volle Tage für Inseln oder Ston nutzen.",
+    ],
+  },
+];
+
+/* ------------------------------ Logik ------------------------------ */
+
+const GESPEICHERT = "adriaKompass";
+let state = { ort: "zadar", modi: ["auto"], budget: 3, kat: "alle", tab: "ausfluege" };
+try {
+  const s = JSON.parse(localStorage.getItem(GESPEICHERT));
+  if (s && s.ort) state = Object.assign(state, s);
+} catch (e) { /* localStorage nicht verfügbar – Standardwerte reichen */ }
+
+function speichern() {
+  try { localStorage.setItem(GESPEICHERT, JSON.stringify(state)); } catch (e) {}
+}
+
+function entfernungKm(a, b) {
+  const R = 6371, rad = (x) => (x * Math.PI) / 180;
+  const dLat = rad(b.lat - a.lat), dLng = rad(b.lng - a.lng);
+  const h = Math.sin(dLat / 2) ** 2 +
+    Math.cos(rad(a.lat)) * Math.cos(rad(b.lat)) * Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
+
+function erreichbar(ziel, dist) {
+  return state.modi.some((m) => {
+    if (m === "auto") return true;
+    if (m === "opnv") return ziel.opnv;
+    if (m === "rad") return ziel.radOk === true || (dist !== null && dist <= RADIUS.rad && ziel.radOk !== false);
+    if (m === "roller") return ziel.rollerOk === true || (dist !== null && dist <= RADIUS.roller && ziel.rollerOk !== false);
+    if (m === "fuss") return dist !== null && dist <= RADIUS.fuss;
+    return false;
+  });
+}
+
+function preisText(p) {
+  return p === 0 ? "Gratis" : "€".repeat(p);
+}
+
+function gefilterteZiele() {
+  const ort = ORTE.find((o) => o.id === state.ort);
+  const mitDistanz = ZIELE.map((z) => ({
+    ...z,
+    dist: ort && ort.lat ? entfernungKm(ort, z) : null,
+  }));
+  return mitDistanz
+    .filter((z) => z.preis <= state.budget)
+    .filter((z) => state.kat === "alle" || z.kat === state.kat)
+    .filter((z) => (state.ort === "alle" ? true : erreichbar(z, z.dist)))
+    .sort((a, b) => (a.dist ?? 0) - (b.dist ?? 0));
+}
+
+/* ------------------------------ Rendern ------------------------------ */
+
+const el = (id) => document.getElementById(id);
+function esc(s) {
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+function renderFilter() {
+  el("ort").innerHTML = ORTE.map(
+    (o) => `<option value="${o.id}" ${o.id === state.ort ? "selected" : ""}>${esc(o.name)}</option>`
+  ).join("");
+
+  el("modi").innerHTML = MODI.map(
+    (m) => `<button type="button" data-modus="${m.id}" aria-pressed="${state.modi.includes(m.id)}">${esc(m.name)}</button>`
+  ).join("");
+
+  el("budget").innerHTML = BUDGETS.map(
+    (b) => `<button type="button" data-budget="${b.id}" aria-pressed="${state.budget === b.id}">${esc(b.name)}</button>`
+  ).join("");
+
+  el("kategorie").innerHTML = KATEGORIEN.map(
+    (k) => `<button type="button" data-kat="${k.id}" aria-pressed="${state.kat === k.id}">${esc(k.name)}</button>`
+  ).join("");
+}
+
+function kartenHtml(z) {
+  const katName = (KATEGORIEN.find((k) => k.id === z.kat) || {}).name || z.kat;
+  const distText = z.dist !== null && state.ort !== "alle"
+    ? `${z.dist < 10 ? z.dist.toFixed(1) : Math.round(z.dist)} km`
+    : "";
+  return `
+    <article class="karte">
+      <div class="oben">
+        <h3>${esc(z.name)}</h3>
+        ${distText ? `<span class="dist">${distText}</span>` : ""}
+      </div>
+      <div class="meta">
+        <span class="tag kat">${esc(katName)}</span>
+        <span class="tag ${z.preis === 0 ? "gratis" : ""}">${preisText(z.preis)}</span>
+        <span class="tag">${esc(z.dauer)}</span>
+      </div>
+      <p>${esc(z.desc)}</p>
+      <div class="zeile"><strong>Anreise:</strong> ${esc(z.anreise)}</div>
+      <div class="zeile"><strong>Kosten:</strong> ${esc(z.preisNote)}</div>
+      <div class="tipp">💡 ${esc(z.tipp)}</div>
+    </article>`;
+}
+
+function renderAusfluege() {
+  const ziele = gefilterteZiele();
+  if (!ziele.length) {
+    return `<div class="leer">Nichts gefunden – probier ein größeres Budget oder ein weiteres Verkehrsmittel.<br>
+      Tipp: „Bus / Fähre / Tour“ öffnet fast alle Ziele auch ohne Auto.</div>`;
+  }
+  const hinweis = `<p class="anzahl">${ziele.length} ${ziele.length === 1 ? "Ziel" : "Ziele"}${
+    state.ort !== "alle" ? " – sortiert nach Entfernung (Luftlinie)" : ""
+  }</p>`;
+
+  if (state.ort === "alle") {
+    const regionen = [...new Set(ziele.map((z) => z.region))];
+    return hinweis + `<div class="karten">` + regionen.map(
+      (r) => `<h2 class="regionTitel">${esc(r)}</h2>` +
+        ziele.filter((z) => z.region === r).map(kartenHtml).join("")
+    ).join("") + `</div>`;
+  }
+  return hinweis + `<div class="karten">${ziele.map(kartenHtml).join("")}</div>`;
+}
+
+function renderRouten() {
+  return `<p class="anzahl">Optimale Rundgänge: wo du anfängst, was in welcher Reihenfolge – und wann.</p>` +
+    ROUTEN.map((r, i) => `
+    <details class="stadt" ${ORTE.find((o) => o.id === state.ort && r.stadt.startsWith(o.name.split(" ")[0])) ? "open" : ""}>
+      <summary><h3>${esc(r.stadt)}</h3><span class="dauer">${esc(r.dauer)}</span></summary>
+      <div class="routeInhalt">
+        <p class="start"><strong>Startpunkt:</strong> ${esc(r.start)}</p>
+        <ol class="route">
+          ${r.schritte.map((s) => `<li><span class="ort">${esc(s.ort)}</span><span class="notiz">${esc(s.notiz)}</span></li>`).join("")}
+        </ol>
+        <p class="danach"><strong>Danach:</strong> ${esc(r.danach)}</p>
+      </div>
+    </details>`).join("");
+}
+
+function renderPraktisch() {
+  return `<div class="praktisch">` + PRAKTISCH.map(
+    (p) => `<h3>${esc(p.titel)}</h3><ul>${p.punkte.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`
+  ).join("") + `</div>`;
+}
+
+function render() {
+  document.querySelectorAll(".tabs button").forEach(
+    (b) => b.setAttribute("aria-selected", String(b.dataset.tab === state.tab))
+  );
+  const inhalt = el("inhalt");
+  if (state.tab === "ausfluege") inhalt.innerHTML = renderAusfluege();
+  else if (state.tab === "routen") inhalt.innerHTML = renderRouten();
+  else inhalt.innerHTML = renderPraktisch();
+}
+
+/* ------------------------------ Events ------------------------------ */
+
+el("ort").addEventListener("change", (e) => {
+  state.ort = e.target.value; speichern(); render();
+});
+
+el("modi").addEventListener("click", (e) => {
+  const b = e.target.closest("button"); if (!b) return;
+  const m = b.dataset.modus;
+  state.modi = state.modi.includes(m)
+    ? state.modi.filter((x) => x !== m)
+    : [...state.modi, m];
+  if (!state.modi.length) state.modi = [m]; // mindestens eins bleibt aktiv
+  speichern(); renderFilter(); render();
+});
+
+el("budget").addEventListener("click", (e) => {
+  const b = e.target.closest("button"); if (!b) return;
+  state.budget = Number(b.dataset.budget); speichern(); renderFilter(); render();
+});
+
+el("kategorie").addEventListener("click", (e) => {
+  const b = e.target.closest("button"); if (!b) return;
+  state.kat = b.dataset.kat; speichern(); renderFilter(); render();
+});
+
+document.querySelector(".tabs").addEventListener("click", (e) => {
+  const b = e.target.closest("button"); if (!b) return;
+  state.tab = b.dataset.tab; speichern(); render();
+});
+
+renderFilter();
+render();
+</script>
+</body>
+</html>

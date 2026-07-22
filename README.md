@@ -54,6 +54,16 @@ Smoke-Test als Wächter. Pages wird beim ersten Workflow-Lauf automatisch
 aktiviert; die App erscheint dann unter
 `https://singlesingams.github.io/Project_X/`.
 
+## Nebenprojekt: Adria-Kompass 🧭
+
+Unter `public/kroatien/` liegt ein eigenständiger, interaktiver
+Kroatien-Reiseführer (eine einzelne HTML-Datei, kein Build nötig):
+Ausflugsziele mit Preisen und Anreise, optimale Stadt-Rundgänge und
+Praxis-Tipps – filterbar nach Standort, Budget und Verkehrsmittel
+(Auto, Bus/Fähre, Roller, Fahrrad, zu Fuß). Da der Ordner `public/`
+von Vite unverändert mitkopiert wird, ist die App nach dem Deployment
+unter `https://singlesingams.github.io/Project_X/kroatien/` erreichbar.
+
 ## Nächste Schritte (siehe KONZEPT.md)
 
 - [x] Welt „Entgeltumwandlung" auf 5 Lektionen ausbauen (25 Fragen)
